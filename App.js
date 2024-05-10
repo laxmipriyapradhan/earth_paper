@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar translucent backgroundColor="transparent" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen

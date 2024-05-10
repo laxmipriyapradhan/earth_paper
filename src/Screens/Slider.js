@@ -69,7 +69,7 @@ const Slider = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor={'#EEEEEE'} />
+      {/* <StatusBar backgroundColor={'#EEEEEE'} /> */}
       <View
         style={{
           height: windowHeight * 0.8 - 20,
