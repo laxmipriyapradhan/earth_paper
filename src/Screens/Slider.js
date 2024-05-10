@@ -9,13 +9,14 @@ import {
   Dimensions,
   StatusBar,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import SlideItem from './SlideItem';
 import Pagination from './Pagination';
 import slides from '../Constraints/slides';
-const navigation = useNavigation();
+import {COLORS} from '../Constraints/Colors';
 
 const Slider = () => {
+  const navigation = useNavigation();
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const windowWidth = Dimensions.get('window').width;
@@ -52,10 +53,9 @@ const Slider = () => {
       flatListRef.current.scrollToIndex({index: index + 1});
     }
   };
-  
+
   const handleOnboardingComplete = () => {
-    
-    navigation.navigate('Login'); 
+    navigation.navigate('Login');
   };
 
   return (
@@ -90,18 +90,18 @@ const Slider = () => {
         <Pagination data={slides} scrollX={scrollX} index={index} />
       </View>
       <TouchableOpacity
-          // onPress={() => {
-          //   if (slides.length === index + 1) {
-          //     handleOnboardingComplete();
-          //   } else {
-          //     goToNextSlide();
-          //   }
-          // }}
-          onPress={goToNextSlide}
+        onPress={() => {
+          if (slides.length === index + 1) {
+            handleOnboardingComplete();
+          } else {
+            goToNextSlide();
+          }
+        }}
+        // onPress={goToNextSlide}
         style={{
           width: windowWidth - 60,
           height: 50,
-          backgroundColor: 'blue',
+          backgroundColor: COLORS.btnPrimary,
           alignItems: 'center',
           justifyContent: 'center',
           position: 'absolute',
@@ -113,7 +113,6 @@ const Slider = () => {
         <View>
           <Text style={{color: 'white', fontWeight: '600', fontSize: 18}}>
             {slides.length == index + 1 ? 'Done' : 'Skip'}
-            
           </Text>
         </View>
       </TouchableOpacity>
