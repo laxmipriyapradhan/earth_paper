@@ -8,12 +8,12 @@ import {
 import React from 'react';
 import {COLORS, windowWidth} from '../Constraints/Colors';
 
-const CustomButton = ({text, onBtnPress}) => {
+const CustomButton = ({text, onBtnPress, widthDecrement}) => {
   return (
     <TouchableOpacity
       onPress={onBtnPress}
       style={{
-        width: windowWidth - 60,
+        width: windowWidth - widthDecrement,
         height: 50,
         backgroundColor: COLORS.btnPrimary,
         alignItems: 'center',

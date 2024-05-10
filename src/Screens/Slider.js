@@ -108,6 +108,7 @@ const Slider = () => {
         <CustomButton
           text={slides.length == index + 1 ? 'Done' : 'Skip'}
           onBtnPress={onBtnPress}
+          widthDecrement={60}
         />
       </View>
     </View>
