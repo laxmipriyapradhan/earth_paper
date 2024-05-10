@@ -14,6 +14,7 @@ import SlideItem from './SlideItem';
 import Pagination from './Pagination';
 import slides from '../Constraints/slides';
 import {COLORS} from '../Constraints/Colors';
+import CustomButton from '../Common/CustomButton';
 
 const Slider = () => {
   const navigation = useNavigation();
@@ -58,6 +59,14 @@ const Slider = () => {
     navigation.navigate('Login');
   };
 
+  const onBtnPress = () => {
+    if (slides.length === index + 1) {
+      handleOnboardingComplete();
+    } else {
+      goToNextSlide();
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor={'#EEEEEE'} />
@@ -89,33 +98,18 @@ const Slider = () => {
         />
         <Pagination data={slides} scrollX={scrollX} index={index} />
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          if (slides.length === index + 1) {
-            handleOnboardingComplete();
-          } else {
-            goToNextSlide();
-          }
-        }}
-        // onPress={goToNextSlide}
+      <View
         style={{
-          width: windowWidth - 60,
-          height: 50,
-          backgroundColor: COLORS.btnPrimary,
-          alignItems: 'center',
-          justifyContent: 'center',
           position: 'absolute',
           bottom: 40,
           left: 30,
           right: 30,
-          borderRadius: 5,
         }}>
-        <View>
-          <Text style={{color: 'white', fontWeight: '600', fontSize: 18}}>
-            {slides.length == index + 1 ? 'Done' : 'Skip'}
-          </Text>
-        </View>
-      </TouchableOpacity>
+        <CustomButton
+          text={slides.length == index + 1 ? 'Done' : 'Skip'}
+          onBtnPress={onBtnPress}
+        />
+      </View>
     </View>
   );
 };
