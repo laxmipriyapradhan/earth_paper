@@ -16,8 +16,8 @@ import slides from '../Constraints/slides';
 import {COLORS} from '../Constraints/Colors';
 import CustomButton from '../Common/CustomButton';
 
-const Slider = () => {
-  const navigation = useNavigation();
+const Slider = ({navigation}) => {
+  // const navigation = useNavigation();
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const windowWidth = Dimensions.get('window').width;
@@ -102,8 +102,7 @@ const Slider = () => {
         style={{
           position: 'absolute',
           bottom: 40,
-          left: 30,
-          right: 30,
+      
         }}>
         <CustomButton
           text={slides.length == index + 1 ? 'Done' : 'Skip'}

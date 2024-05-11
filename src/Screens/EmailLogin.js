@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { COLORS, FONTSTYLES, windowWidth } from '../Constraints/Colors';
-import CustomButton from '../Common/CustomButton';
-import SplashScreen from 'react-native-splash-screen';
+import { COLORS, FONTSTYLES, windowWidth} from '../Constraints/Colors';
 
 
 
-const Login = ({ navigation }) => {
+const EmailLogin = ({navigation}) => {
 
-  const [mobileno, setMobileno] = useState('')
-  const onBtnPress = () => {
-    navigation.navigate('Passwordvalidation', { mobileno: mobileno });
+  const [emailaddress, setEmailaddress] = useState('')
+  const onBtnPress =()=>{
+    navigation.navigate('Passwordvalidation', { emailaddress: emailaddress });
 
   }
 
@@ -20,14 +18,12 @@ const Login = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <Image style={{resizeMode:"cover"}} source={require('../assets/banner.png')} />
-        <Text style={styles.text}
-        
-        >Welcome! Login to your account</Text>
+        <Image source={require('../assets/banner.png')} />
+        <Text style={styles.text}>Welcome! Login to your account</Text>
         <View
           style={{
             flexDirection: 'row',
-
+         
             borderRadius: 10,
             borderWidth: 2,
             borderColor: '#DADADA',
@@ -36,21 +32,18 @@ const Login = ({ navigation }) => {
             alignItems: 'center',
             marginHorizontal: 25,
           }}>
-          <View style={{ alignSelf: 'left' }}>
-            <Text style={{ fontSize: 18, color: '#303030', marginLeft: 10 }}>
-              +91
-            </Text>
-          </View>
+    
           <TextInput
-            placeholder=" Enter Mobile Number"
-            value={mobileno}
-            onChangeText={(newMobileno) => setMobileno(newMobileno)}
-            style={{ fontSize: 18, marginLeft: 5 }}
+            placeholder="Enter email address"
+            value= {emailaddress}
+            onChangeText={(newMobileno) => setEmailaddress(newMobileno)}
+            style={{ fontSize: 18, marginLeft: 30 }}
             placeholderTextColor={COLORS.placeholderTextColor}
             cursorColor={'black'}
           />
-        </View>
-        <TouchableOpacity
+          </View>
+      
+      <TouchableOpacity
       onPress={onBtnPress}
       style={{
         width: windowWidth - 40, //change
@@ -63,7 +56,7 @@ const Login = ({ navigation }) => {
         justifyContent: "center",
         alignItems: "center"
       }}>
-      <View style={styles.iconConatiner}>
+   <View style={styles.iconConatiner}>
       <Image style={styles.icon} source={require('../assets/chevrons-right.png')} />
         <Text style={{color: 'white', fontWeight: '600', fontSize: 18, marginLeft: 80 }}>
         Send OTP
@@ -71,16 +64,17 @@ const Login = ({ navigation }) => {
       </View>
     </TouchableOpacity>
 
-        <View style={styles.linksContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('EmailLogin')}>
-            <Text style={styles.linkText}>Login with Email</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.linkText}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
+ 
+    <View style={styles.linksContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.linkText}>Login with mobile number</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.linkText}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
 
-
+   
       </View>
     </>
   );
@@ -90,17 +84,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-
-
-  },
-  btncontainer: {
-    flex: 1,
-    alignItems: "center",
-    flexDirection: 'row',
-
+    
+    
   },
   text: {
-    color: COLORS.textColor1,
+    color: '#303030',
     fontSize: 20,
     margin: 30,
     fontWeight: 'bold',
@@ -136,4 +124,4 @@ const styles = StyleSheet.create({
  }
 });
 
-export default Login;
+export default EmailLogin;

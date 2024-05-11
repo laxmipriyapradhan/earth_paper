@@ -10,8 +10,15 @@ export const COLORS = {
   borderColor: '#DADADA',
   btnPrimary: '#123cb4',
   btnCarousel: '#008bc3',
+  placeholderTextColor1: "#989898",
+  
 };
+export const  FONTSTYLES ={
+  fontstying: "Nunito",
+}
 export const SIZES = {
   h1: 24,
+  h2: 16,
   h4: 20,
+
 };

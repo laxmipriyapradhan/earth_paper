@@ -1,5 +1,7 @@
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import React from 'react';
+import { COLORS, FONTSTYLES, SIZES } from '../Constraints/Colors';
+
 
 const CustomTextInput = ({value, onChangeText, placeholder, type}) => {
   return (
@@ -14,7 +16,10 @@ const CustomTextInput = ({value, onChangeText, placeholder, type}) => {
         paddingLeft: 10,
         fontSize: 20,
       }}>
-      <TextInput placeholder={placeholder}></TextInput>
+      <TextInput  style= {{fontFamily: FONTSTYLES.fontstying, fontSize: SIZES.h2,}}
+      placeholderTextColor={COLORS.placeholderTextColor}
+      placeholder={placeholder}></TextInput>
+     
     </View>
   );
 };

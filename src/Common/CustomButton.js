@@ -18,7 +18,11 @@ const CustomButton = ({text, onBtnPress, widthDecrement}) => {
         backgroundColor: COLORS.btnPrimary,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
+        borderRadius: 6,
+        bottom: 5,
+        left : 30,
+        right: 30
+     
       }}>
       <View>
         <Text style={{color: 'white', fontWeight: '600', fontSize: 18}}>

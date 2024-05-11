@@ -5,6 +5,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/Screens/Login';
 import Slider from './src/Screens/Slider';
 import {StatusBar} from 'react-native';
+import PasswordValidation from './src/Screens/Passwordvalidation';
+import EmailLogin from './src/Screens/EmailLogin';
+import Homepage from './src/Screens/Homepage';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -30,6 +33,21 @@ const App = () => {
           <Stack.Screen
             name="Login"
             component={Login}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name="Passwordvalidation"
+            component={PasswordValidation}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EmailLogin"
+            component={EmailLogin}
+            options={{headerShown: false}}
+          />
+              <Stack.Screen
+            name="Homepage"
+            component={Homepage}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
