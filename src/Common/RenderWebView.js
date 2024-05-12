@@ -2,12 +2,12 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {WebView} from 'react-native-webview';
 
-const Homepage = () => {
+const RenderWebView = ({url}) => {
   return (
     <>
-      <WebView source={{uri: 'www.google.com'}} style={{flex: 1}} />
+      <WebView source={{uri: url}} style={{flex: 1}} />
     </>
   );
 };
 
-export default Homepage;
+export default RenderWebView;
