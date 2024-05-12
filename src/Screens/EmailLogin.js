@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import { COLORS, FONTSTYLES, windowWidth} from '../Constraints/Colors';
 
 
@@ -7,9 +7,10 @@ import { COLORS, FONTSTYLES, windowWidth} from '../Constraints/Colors';
 const EmailLogin = ({navigation}) => {
 
   const [emailaddress, setEmailaddress] = useState('')
-  const onBtnPress =()=>{
-    navigation.navigate('Passwordvalidation', { emailaddress: emailaddress });
 
+  const onBtnPress =()=>{
+
+      navigation.navigate('Passwordvalidationemail',{ emailaddress: emailaddress } );
   }
 
 
@@ -36,7 +37,7 @@ const EmailLogin = ({navigation}) => {
           <TextInput
             placeholder="Enter email address"
             value= {emailaddress}
-            onChangeText={(newMobileno) => setEmailaddress(newMobileno)}
+            onChangeText={(newemailaddress) => setEmailaddress(newemailaddress)}
             style={{ fontSize: 18, marginLeft: 30 }}
             placeholderTextColor={COLORS.placeholderTextColor}
             cursorColor={'black'}
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   },
   icon: {
   resizeMode:"cover",
-  alignSelf: 'left',
+
   marginLeft: -120,
 
  }

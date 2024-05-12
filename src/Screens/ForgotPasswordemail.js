@@ -5,22 +5,22 @@ import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 
 
-const ForgotPassword = ({ route, navigation }) => {
-    const { mobileno } = route.params;
-    console.log("a ra h",mobileno)
+const ForgotPasswordemail = ({ route, navigation }) => {
+    const { emailaddress } = route.params;
+    console.log("a ra h",emailaddress)
 
     const onBtnPress = () => {
-        navigation.navigate('OtpValidation', {mobileno: mobileno });
+        navigation.navigate('Homepage');
 
     }
     const onChangePress = () => {
-        navigation.navigate('Login', mobileno);
+        navigation.navigate('Login');
     }
-    // const onForgotbtnPress = () => {
-    //     navigation.navigate('ForgotPassword');
+    const onForgotbtnPress = () => {
+        navigation.navigate('ForgotPassword');
 
 
-    // }
+    }
 
     return (
         <>
@@ -33,7 +33,7 @@ const ForgotPassword = ({ route, navigation }) => {
                 </View>
                 <Text style={styles.textplaceholder1}>Email address or Mobile Number</Text>
 
-                <CustomTextInput placeholder={"+91" + mobileno} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
+                <CustomTextInput placeholder={emailaddress} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
                 <CustomButton text={"Reset password"} onBtnPress={onBtnPress} widthDecrement={60} />
 
                 <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
@@ -120,5 +120,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ForgotPassword;
+export default ForgotPasswordemail;
 

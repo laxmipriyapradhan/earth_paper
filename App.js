@@ -9,6 +9,9 @@ import PasswordValidation from './src/Screens/Passwordvalidation';
 import EmailLogin from './src/Screens/EmailLogin';
 import Homepage from './src/Screens/Homepage';
 import ForgotPassword from './src/Screens/ForgotPassword';
+import Passwordvalidationemail from './src/Screens/Passwordvalidationemail';
+import ForgotPasswordemail from './src/Screens/ForgotPasswordemail';
+import OtpValidation from './src/Screens/OtpValidation';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -56,6 +59,23 @@ const App = () => {
             component={ForgotPassword}
             options={{headerShown: false}}
           />
+    
+        <Stack.Screen
+            name="Passwordvalidationemail"
+            component={Passwordvalidationemail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ForgotPasswordemail"
+            component={ForgotPasswordemail}
+            options={{headerShown: false}}
+          />
+             <Stack.Screen
+            name="OtpValidation"
+            component={OtpValidation}
+            options={{headerShown: false}}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </>
