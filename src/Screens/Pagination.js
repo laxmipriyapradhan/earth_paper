@@ -47,12 +47,13 @@ export default Pagination;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    bottom: 0,
+    // position: 'absolute',
+    // bottom: 0,
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
   },
   dot: {
     width: 15,
