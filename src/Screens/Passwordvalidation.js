@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextCompone
 import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Colors';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 const PasswordValidation = ({ route, navigation }) => {
   const { mobileno } = route.params;
@@ -19,7 +19,7 @@ const PasswordValidation = ({ route, navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <Image style={{resizeMode:"cover"}} source={require('../assets/banner.png')} />
+        <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
         <Text style={styles.text}>Welcome! Login to your account</Text>
         <View style={styles.linksContainer}>
 
@@ -27,23 +27,26 @@ const PasswordValidation = ({ route, navigation }) => {
 
 
           <TouchableOpacity onPress={onChangePress}>
-            <Text style={[styles.linkText, { color: COLORS.btnPrimary, }]}>Change</Text>
+            <Text style={[styles.linkText, { color: COLORS.btnPrimary}]}>Change</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.textplaceholder1}>Password</Text>
-        
+        <TouchableOpacity onPress={onChangePress}>
+            <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:30, marginLeft:260}]}>Forgot Password ?</Text>
+          </TouchableOpacity>
+
 
         <CustomTextInput placeholder="Enter password" ></CustomTextInput>
-        <CustomButton text={"Login"} onBtnPress={onBtnPress} widthDecrement={60} ></CustomButton>
+        <CustomButton text={"Login"} onBtnPress={onBtnPress} widthDecrement={60} />
         <View style={styles.orContainer}>
-       
-          <View style={styles.line} />
-        <Text style= {styles.textOr}>  or  </Text>
-        <View style={styles.line} />
-   
-        </View>
-        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={60} ></CustomButton>
 
+          <View style={styles.line} />
+          <Text style={styles.textOr}>  or  </Text>
+          <View style={styles.line} />
+
+        </View>
+        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
+        <Text style={{fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight:"bold", marginLeft: 170, margin: 20, width: windowWidth}}>Need Help</Text>
       </View>
     </>
   );
@@ -72,15 +75,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTSTYLES.fontstying,
   },
 
+
   textplaceholder: {
-    color: Colors.placeholderTextColor,
+    color: COLORS.placeholderTextColor,
   },
   textplaceholder1:
   {
-    marginBottom: 5, 
+    marginBottom: 5,
     fontSize: SIZES.h2,
     margin: 30,
-    color: Colors.placeholderTextColor1,
+    color: COLORS.placeholderTextColor1,
 
   },
   linksContainer: {
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textDecorationLine: 'underline',
   },
-  textOr:{
+  textOr: {
     textAlign: "center",
 
   },
@@ -104,17 +108,17 @@ const styles = StyleSheet.create({
     flex: 0.5,
     height: 1,
     top: 2.5,
-    backgroundColor: COLORS.placeholderTextColor1, 
+    backgroundColor: COLORS.placeholderTextColor1,
   },
-  orContainer:{
+  orContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     width: windowWidth - 60,
     marginHorizontal: 30,
     justifyContent: 'space-between',
-    margin: 20
+    marginBottom: 15
 
-  
+
   }
 });
 

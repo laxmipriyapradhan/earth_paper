@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <Image style={{resizeMode:"cover"}} source={require('../assets/banner.png')} />
+        <Image style={{resizeMode: "contain"}} source={require('../assets/banner.png')} />
         <Text style={styles.text}
         
         >Welcome! Login to your account</Text>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   icon: {
   resizeMode:"cover",
-  alignSelf: 'left',
+ 
   marginLeft: -120,
 
  }

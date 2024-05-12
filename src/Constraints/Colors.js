@@ -11,6 +11,8 @@ export const COLORS = {
   btnPrimary: '#123cb4',
   btnCarousel: '#008bc3',
   placeholderTextColor1: "#989898",
+  borderBtnColor: '#123cb4',
+
   
 };
 export const  FONTSTYLES ={

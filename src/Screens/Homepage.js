@@ -1,11 +1,13 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { WebView } from 'react-native-webview';
 
 const Homepage = () => {
   return (
-    <View>
-      <Text>Homepage</Text>
-    </View>
+    <>
+    
+    <WebView source={{uri:"www.google.com"}} style={{flex:1}} />
+   </>
   )
 }
 

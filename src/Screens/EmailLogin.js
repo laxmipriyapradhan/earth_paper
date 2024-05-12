@@ -18,7 +18,7 @@ const EmailLogin = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <Image source={require('../assets/banner.png')} />
+        <Image style={{resizeMode: "contain"}} source={require('../assets/banner.png')} />
         <Text style={styles.text}>Welcome! Login to your account</Text>
         <View
           style={{
