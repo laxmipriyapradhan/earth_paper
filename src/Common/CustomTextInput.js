@@ -3,7 +3,7 @@ import React from 'react';
 import { COLORS, FONTSTYLES, SIZES } from '../Constraints/Colors';
 
 
-const CustomTextInput = ({value, onChangeText, placeholder, type}) => {
+const CustomTextInput = ({value, onChangeText, placeholder, type, placeholderTextColor1}) => {
   return (
     <View
       style={{
@@ -17,7 +17,7 @@ const CustomTextInput = ({value, onChangeText, placeholder, type}) => {
         fontSize: 20,
       }}>
       <TextInput  style= {{fontFamily: FONTSTYLES.fontstying, fontSize: SIZES.h2,}}
-      placeholderTextColor={COLORS.placeholderTextColor}
+      placeholderTextColor={placeholderTextColor1 ? placeholderTextColor1: COLORS.placeholderTextColor }
       placeholder={placeholder}></TextInput>
      
     </View>

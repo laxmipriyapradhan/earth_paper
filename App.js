@@ -8,6 +8,7 @@ import {StatusBar} from 'react-native';
 import PasswordValidation from './src/Screens/Passwordvalidation';
 import EmailLogin from './src/Screens/EmailLogin';
 import Homepage from './src/Screens/Homepage';
+import ForgotPassword from './src/Screens/ForgotPassword';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -48,6 +49,11 @@ const App = () => {
               <Stack.Screen
             name="Homepage"
             component={Homepage}
+            options={{headerShown: false}}
+          />
+              <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
             options={{headerShown: false}}
           />
         </Stack.Navigator>

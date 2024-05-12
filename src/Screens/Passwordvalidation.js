@@ -15,6 +15,9 @@ const PasswordValidation = ({ route, navigation }) => {
   const onChangePress = () => {
     navigation.navigate('Login', mobileno);
   }
+  const onForgotbtnPress = () => {
+    navigation.navigate('ForgotPassword', { mobileno: mobileno });
+ }
 
   return (
     <>
@@ -31,7 +34,7 @@ const PasswordValidation = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
         <Text style={styles.textplaceholder1}>Password</Text>
-        <TouchableOpacity onPress={onChangePress}>
+        <TouchableOpacity onPress={onForgotbtnPress}>
             <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:30, marginLeft:260}]}>Forgot Password ?</Text>
           </TouchableOpacity>
 

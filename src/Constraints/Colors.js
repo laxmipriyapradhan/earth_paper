@@ -17,10 +17,12 @@ export const COLORS = {
 };
 export const  FONTSTYLES ={
   fontstying: "Nunito",
+  fontstying1: "Nunito Sans",
 }
 export const SIZES = {
   h1: 24,
   h2: 16,
+  h3: 14,
   h4: 20,
 
 };
