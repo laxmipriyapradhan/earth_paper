@@ -72,11 +72,7 @@ const Slider = ({navigation}) => {
       {/* <StatusBar backgroundColor={'#EEEEEE'} /> */}
       <View
         style={{
-<<<<<<< HEAD
           // height: windowHeight * 0.8 - 20,
-=======
-          // height: windowHeight * 0.4 - 20,
->>>>>>> 0afec2cf5ee42e7c02393d151461ed3bc6917a29
           backgroundColor: 'white',
           // marginTop: -30,
         }}>
