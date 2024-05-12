@@ -72,7 +72,11 @@ const Slider = ({navigation}) => {
       {/* <StatusBar backgroundColor={'#EEEEEE'} /> */}
       <View
         style={{
+<<<<<<< HEAD
           // height: windowHeight * 0.8 - 20,
+=======
+          // height: windowHeight * 0.4 - 20,
+>>>>>>> 0afec2cf5ee42e7c02393d151461ed3bc6917a29
           backgroundColor: 'white',
           // marginTop: -30,
         }}>
@@ -96,13 +100,12 @@ const Slider = ({navigation}) => {
           onViewableItemsChanged={handleOnViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
         />
-        <Pagination data={slides} scrollX={scrollX} index={index} />
       </View>
+      <Pagination data={slides} scrollX={scrollX} index={index} />
       <View
         style={{
           position: 'absolute',
           bottom: 40,
-      
         }}>
         <CustomButton
           text={slides.length == index + 1 ? 'Done' : 'Skip'}
