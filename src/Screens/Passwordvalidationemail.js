@@ -9,7 +9,7 @@ const Passwordvalidationemail = ({ route, navigation}) => {
   const { emailaddress } = route.params;
 
   const onBtnPress = () => {
-    navigation.navigate('ForgotPasswordemail', {emailaddress: emailaddress});
+    navigation.navigate('Homepage');
 
   }
   const onChangePress = () => {

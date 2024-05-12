@@ -3692,11 +3692,6 @@ fs.realpath@^1.0.0:
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
 
-fsevents@^2.3.2, fsevents@~2.3.2:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
-
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -6014,6 +6009,13 @@ react-native-gesture-handler@^2.14.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+react-native-otp-textinput@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/react-native-otp-textinput/-/react-native-otp-textinput-1.1.5.tgz"
+  integrity sha512-zV5aq5gyU54SPn5WGC8el0P1RdOEb0FiuPg9O+yBhwieDy2/ov16830KCHPG0ZNN5DErTPtzwLbrXQUdrt7tNA==
+  dependencies:
+    react "^18.2.0"
+
 react-native-recaptcha-that-works@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/react-native-recaptcha-that-works/-/react-native-recaptcha-that-works-2.0.0.tgz"
@@ -6045,7 +6047,7 @@ react-native-webview@^13.10.0, react-native-webview@>=10:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native@*, react-native@^0.72.6, react-native@>=0.57.0, react-native@>=0.60:
+react-native@*, react-native@^0.72.4, react-native@^0.72.6, react-native@>=0.57.0, react-native@>=0.60:
   version "0.72.14"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.14.tgz"
   integrity sha512-7L0ync/mSyyUPL09lXYFiseibKwhXs4dWVm8olWfFAKqe8xjwsGD4CWXCUEydhHI906FIhJKMjIK59wb98zAug==

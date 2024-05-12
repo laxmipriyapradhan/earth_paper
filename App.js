@@ -12,6 +12,9 @@ import ForgotPassword from './src/Screens/ForgotPassword';
 import Passwordvalidationemail from './src/Screens/Passwordvalidationemail';
 import ForgotPasswordemail from './src/Screens/ForgotPasswordemail';
 import OtpValidation from './src/Screens/OtpValidation';
+import Reset from './src/Screens/Reset';
+import OtpValidationemail from './src/Screens/OtpValidationemail';
+import Resetemail from './src/Screens/Resetemail';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -73,6 +76,21 @@ const App = () => {
              <Stack.Screen
             name="OtpValidation"
             component={OtpValidation}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name="Reset"
+            component={Reset}
+            options={{headerShown: false}}
+          />
+             <Stack.Screen
+            name="OtpValidationemail"
+            component={OtpValidationemail}
+            options={{headerShown: false}}
+          />
+              <Stack.Screen
+            name="Resetemail"
+            component={Resetemail}
             options={{headerShown: false}}
           />
 

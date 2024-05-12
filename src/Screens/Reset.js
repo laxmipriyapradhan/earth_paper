@@ -5,38 +5,41 @@ import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 
 
-const ForgotPasswordemail = ({ route, navigation }) => {
-    const { emailaddress } = route.params;
-    console.log("a ra h",emailaddress)
+const Reset = ({navigation}) => {
+
+
 
     const onBtnPress = () => {
-        navigation.navigate('Resetemail',  { emailaddress: emailaddress});
+        navigation.navigate('Homepage');
 
     }
     const onChangePress = () => {
-        navigation.navigate('Login');
+        navigation.navigate('Login', mobileno);
     }
-    const onForgotbtnPress = () => {
-        navigation.navigate('ForgotPassword');
+    // const onForgotbtnPress = () => {
+    //     navigation.navigate('ForgotPassword');
 
 
-    }
+    // }
 
     return (
         <>
             <View style={styles.container}>
                 <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
-                <Text style={styles.text}>Forgot Password</Text>
-                <Text style={styles.forgotText}>Enter the email address or mobile phone number associated with your galaxy account.</Text>
-                <View style={styles.linksContainer}>
+                <Text style={styles.text}>Set Password</Text>
+                <View style= {styles.textResetcontainer}>
+        
+                <Text style={styles.textplaceholder1}>Enter password</Text>
 
-                </View>
-                <Text style={styles.textplaceholder1}>Email address or Mobile Number</Text>
-
-                <CustomTextInput placeholder={emailaddress} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
-                <CustomButton text={"Reset password"} onBtnPress={onBtnPress} widthDecrement={60} />
-
+                <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
+                <View style= {styles.textResetChildcontainer}>
+                <Text style={styles.textplaceholder1}>Re-enter password</Text>
+                <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
+                <CustomButton text={"Reset"} onBtnPress={onBtnPress} widthDecrement={60} />
+               
                 <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
+                </View>
+                </View>
             </View>
         </>
     );
@@ -46,6 +49,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
+       
 
     },
     textMobile: {
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
     text: {
         color: '#303030',
         fontSize: 20,
-        margin: 20,
+        margin: 30,
         fontWeight: 'bold',
         fontFamily: FONTSTYLES.fontstying,
     },
@@ -116,9 +120,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 15
 
+    },
+    textResetcontainer:{
+        flex: 1,
+        bottom: 25
+    },
+    textResetChildcontainer:{
+        bottom: 40
 
     }
 });
 
-export default ForgotPasswordemail;
+export default Reset;
 

@@ -6,8 +6,8 @@ import CustomTextInput from '../Common/CustomTextInput';
 import OTPTextView from 'react-native-otp-textinput';
 
 
-const OtpValidation = ({ route, navigation }) => {
-    const { mobileno } = route.params;
+const OtpValidationemail = ({ route, navigation }) => {
+    const { emailaddress } = route.params;
     const [showResend, setShowResend] = useState(false);
 
     useEffect(() => {
@@ -29,11 +29,11 @@ const OtpValidation = ({ route, navigation }) => {
     }, [showResend]);
 
     const onBtnPress = () => {
-        navigation.navigate('Reset');
+        navigation.navigate('Resetemail');
 
     }
     const onChangePress = () => {
-        navigation.navigate('Login', mobileno);
+        navigation.navigate('EmailLogin', {emailaddress: emailaddress});
     }
     const onForgotbtnPress = () => {
         console.log("hello world");
@@ -49,7 +49,7 @@ const OtpValidation = ({ route, navigation }) => {
                 <Text style={styles.text}>Authentication required</Text>
                 <View style={styles.linksContainer}>
 
-                    <Text style={styles.textMobile}>+91{mobileno}</Text>
+                    <Text style={styles.textMobile}>{emailaddress}</Text>
 
 
                     <TouchableOpacity onPress={onChangePress}>
@@ -58,7 +58,7 @@ const OtpValidation = ({ route, navigation }) => {
                 </View>
 
                 <View style={styles.textContainer}>
-                    <Text style={styles.forgotText}>We’ve sent a One Time Password (OTP) to the mobile number above. Please enter it to complete verification</Text>
+                    <Text style={styles.forgotText}>We’ve sent a One Time Password (OTP) to the email address above. Please enter it to complete verification</Text>
                     <Text style={styles.textplaceholder1}>Enter OTP</Text>
                     <TouchableOpacity onPress={onForgotbtnPress}>
                         {/* <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:25, marginLeft:340}]}>Resend</Text> */}
@@ -201,5 +201,5 @@ const styles = StyleSheet.create({
 
 });
 
-export default OtpValidation;
+export default OtpValidationemail;
 
