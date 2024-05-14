@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Colors';
+import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 

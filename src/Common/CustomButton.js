@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import { COLORS, windowWidth } from '../Constraints/Colors';
+import { COLORS, windowWidth } from '../Constraints/Generic';
 
 const CustomButton = ({ text, onBtnPress, widthDecrement, bgColor ,btnTextColor, borderBtnColor, borderbtnWidth}) => {
   return (

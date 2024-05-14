@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../Constraints/Colors';
+import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 import OTPTextView from 'react-native-otp-textinput';

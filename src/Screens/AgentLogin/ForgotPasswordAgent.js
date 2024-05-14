@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
-import CustomButton from '../Common/CustomButton';
-import CustomTextInput from '../Common/CustomTextInput';
+import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../../Constraints/Generic';
+import CustomButton from '../../Common/CustomButton';
+import CustomTextInput from '../../Common/CustomTextInput';
 
 
-const ForgotPasswordemail = ({ route, navigation }) => {
-    const { emailaddress } = route.params;
-    console.log("a ra h",emailaddress)
+const ForgotPasswordAgent = ({ route, navigation }) => {
+    const { agentno } = route.params;
+    console.log("a ra h",agentno)
 
     const onBtnPress = () => {
-        navigation.navigate('Resetemail',  { emailaddress: emailaddress});
+        navigation.navigate('OtpValidationAgent', {agentno: agentno });
 
     }
     const onChangePress = () => {
-        navigation.navigate('Login');
+        navigation.navigate('LoginAgent', agentno);
     }
-    const onForgotbtnPress = () => {
-        navigation.navigate('ForgotPassword');
+    // const onForgotbtnPress = () => {
+    //     navigation.navigate('ForgotPassword');
 
 
-    }
+    // }
 
     return (
         <>
             <View style={styles.container}>
-                <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
+                <Image style={{ resizeMode: "contain" }} source={require('../../assets/banner.png')} />
                 <Text style={styles.text}>Forgot Password</Text>
                 <Text style={styles.forgotText}>Enter the email address or mobile phone number associated with your galaxy account.</Text>
                 <View style={styles.linksContainer}>
@@ -33,7 +33,7 @@ const ForgotPasswordemail = ({ route, navigation }) => {
                 </View>
                 <Text style={styles.textplaceholder1}>Email address or Mobile Number</Text>
 
-                <CustomTextInput value={emailaddress} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
+                <CustomTextInput value={agentno} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
                 <CustomButton text={"Reset password"} onBtnPress={onBtnPress} widthDecrement={60} />
 
                 <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textDecorationLine: 'underline',
     },
+    
     textOr: {
         textAlign: "center",
 
@@ -120,5 +121,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ForgotPasswordemail;
+export default ForgotPasswordAgent;
 

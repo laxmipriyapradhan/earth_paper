@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import SlideItem from './SlideItem';
 import Pagination from './Pagination';
 import slides from '../Constraints/slides';
-import {COLORS} from '../Constraints/Colors';
+import {COLORS} from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 
 const Slider = ({navigation}) => {

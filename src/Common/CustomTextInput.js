@@ -1,9 +1,9 @@
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { COLORS, FONTSTYLES, SIZES } from '../Constraints/Colors';
+import { COLORS, FONTSTYLES, SIZES } from '../Constraints/Generic';
 
 
-const CustomTextInput = ({value, onChangeText, placeholder, type, placeholderTextColor1}) => {
+const CustomTextInput = ({value, onChangeText, placeholder, type, placeholderTextColor1, error}) => {
   return (
     <View
       style={{
@@ -16,14 +16,21 @@ const CustomTextInput = ({value, onChangeText, placeholder, type, placeholderTex
         paddingLeft: 10,
         fontSize: 20,
       }}>
+       
       <TextInput  style= {{fontFamily: FONTSTYLES.fontstying, fontSize: SIZES.h2,}}
       placeholderTextColor={placeholderTextColor1 ? placeholderTextColor1: COLORS.placeholderTextColor }
-      placeholder={placeholder}></TextInput>
-     
+      placeholder={placeholder} value={value} onChangeText={onChangeText}></TextInput>
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };
 
 export default CustomTextInput;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  errorText: {
+    color: COLORS.errorColor,
+    marginTop: 5,
+  },
+
+});

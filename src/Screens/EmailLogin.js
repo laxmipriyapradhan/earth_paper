@@ -1,19 +1,109 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
-import { COLORS, FONTSTYLES, windowWidth} from '../Constraints/Colors';
+import { BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../Constraints/Generic';
+import RenderWebView from '../Common/GoogleReCaptcha';
+import axios from 'axios';
 
 
 
 const EmailLogin = ({navigation}) => {
 
   const [emailaddress, setEmailaddress] = useState('')
+  const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+  useEffect(() => {
+    validateForm();
+  }, [emailaddress]);
 
-  const onBtnPress =()=>{
+  const validateForm = () => {
+    let errors = {};
 
-      navigation.navigate('Passwordvalidationemail',{ emailaddress: emailaddress } );
+   
+    if (!emailaddress) {
+      errors.emailaddress = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(emailaddress)) {
+      errors.emailaddress = "Email is invalid.";
+    }
+
+    setErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0);
+    
   }
 
+  const onBtnPress = async() => {
+    if (!isFormValid) {
+      Alert.alert('Error', 'Please  the fields correctly.');
+      return;
+    }
+    const agentData = {
+     
+      emailAddress: emailaddress,
+      // password: password,
+    };
+  
+  try {
+    console.log("agentData", agentData);
+    
 
+    const response = await axios.post(
+      `${BASE_URL}login/search`,
+      agentData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          requestUID: '4e8ea3bb-b55b-4a6f-ad03-741fee6836c6'
+        },
+      }
+    );
+  
+    console.log('response', response.data);
+  
+    // Check the status code of the response
+    if (response.status === 200) {
+      // Successful registration
+      Alert.alert('Login with email ', 'correct!',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Passwordvalidationemail', {emailaddress: emailaddress}),
+        },
+      ]
+      );
+    
+      console.log("response", response);
+      // You may navigate to another screen or perform additional actions here
+    } else {
+      // Handle other status codes
+      console.error('Unexpected status code', response.status);
+      Alert.alert(
+        'Error',
+        'An error occurred while processing your request. Please try again.',
+      
+      );
+    }
+  } catch (error) {
+
+    if (error.response && error.response.status === 400) {
+      
+      Alert.alert(
+        'Agent Exists',
+
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('Passwordvalidationemail', {mobileno: mobileno}),
+          },
+        ]
+      );
+    
+    } else {
+
+      Alert.alert('Error', 'An error occurred while processing your request.');
+    }
+  }
+
+  };
 
 
   return (
@@ -38,11 +128,29 @@ const EmailLogin = ({navigation}) => {
             placeholder="Enter email address"
             value= {emailaddress}
             onChangeText={(newemailaddress) => setEmailaddress(newemailaddress)}
-            style={{ fontSize: 18, marginLeft: 30 }}
+            style={{ fontSize: 18, marginLeft: 10 }}
             placeholderTextColor={COLORS.placeholderTextColor}
             cursorColor={'black'}
           />
           </View>
+          <View
+          style={{
+            
+            height: 90,
+            backgroundColor: 'white',
+            marginTop: 20,
+            top: 10,
+            marginLeft: 50,
+            width:windowWidth,
+            resizeMode: "contain",
+            
+           
+          }}>
+          
+          <RenderWebView url={'https://diagnal-react-workshop.web.app/'}
+          
+        />
+        </View>
       
       <TouchableOpacity
       onPress={onBtnPress}
@@ -70,8 +178,8 @@ const EmailLogin = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.linkText}>Login with mobile number</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.linkText}>Sign Up</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginAgent')}>
+          <Text style={styles.linkText}>LoginAgent</Text>
         </TouchableOpacity>
       </View>
 

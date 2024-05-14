@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Colors';
+import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 
 
 const ForgotPassword = ({ route, navigation }) => {
-    const { mobileno } = route.params;
-    console.log("a ra h",mobileno)
+    const { mobileno: initialMobileno } = route.params;
+    const [mobileno, setMobileno] = useState(initialMobileno);
+   
 
     const onBtnPress = () => {
         navigation.navigate('OtpValidation', {mobileno: mobileno });
@@ -16,11 +17,7 @@ const ForgotPassword = ({ route, navigation }) => {
     const onChangePress = () => {
         navigation.navigate('Login', mobileno);
     }
-    // const onForgotbtnPress = () => {
-    //     navigation.navigate('ForgotPassword');
 
-
-    // }
 
     return (
         <>
@@ -33,7 +30,7 @@ const ForgotPassword = ({ route, navigation }) => {
                 </View>
                 <Text style={styles.textplaceholder1}>Email address or Mobile Number</Text>
 
-                <CustomTextInput placeholder={"+91" + mobileno} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
+                <CustomTextInput value={mobileno} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
                 <CustomButton text={"Reset password"} onBtnPress={onBtnPress} widthDecrement={60} />
 
                 <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>

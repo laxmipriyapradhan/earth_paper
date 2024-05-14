@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
-import CustomButton from '../Common/CustomButton';
-import CustomTextInput from '../Common/CustomTextInput';
-import { postRequest } from '../Common/Api';
+import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../../Constraints/Generic';
+import CustomButton from '../../Common/CustomButton';
+import CustomTextInput from '../../Common/CustomTextInput';
+import { postRequest } from '../../Common/Api';
 
 
-const Passwordvalidationemail = ({ route, navigation}) => {
-  const { emailaddress } = route.params;
+const PasswordValidationAgent = ({ route, navigation }) => {
+  const { agentno } = route.params;
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
 
   const onChangePress = () => {
-    navigation.navigate('EmailLogin', { emailaddress: emailaddress });
+    navigation.navigate('LoginAgent', { agentno: agentno });
   }
   const onForgotbtnPress = () => {
-    navigation.navigate('ForgotPasswordemail', { emailaddress: emailaddress});
+    navigation.navigate('ForgotPasswordAgent', { agentno: agentno });
  }
 
  const onBtnPress = async () => {
@@ -36,14 +36,27 @@ const Passwordvalidationemail = ({ route, navigation}) => {
     // Handle errors from postRequest function
   }
 }
+
+const onBtnsendOtp =async()=>{
+  
+  try {
+    // Make API call or perform other actions
+    await postRequest('otp/generate', {}, navigation, 'OtpValidationAgent', { agentno: agentno });
+  } catch (error) {
+    console.error('postRequest error:', error);
+    // Handle errors from postRequest function
+  }
+
+}
+
   return (
     <>
       <View style={styles.container}>
-        <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
+        <Image style={{ resizeMode: "contain" }} source={require('../../assets/banner.png')} />
         <Text style={styles.text}>Welcome! Login to your account</Text>
         <View style={styles.linksContainer}>
 
-          <Text style={styles.textMobile}>{emailaddress}</Text>
+          <Text style={styles.textMobile}>{agentno}</Text>
 
 
           <TouchableOpacity onPress={onChangePress}>
@@ -56,7 +69,7 @@ const Passwordvalidationemail = ({ route, navigation}) => {
           </TouchableOpacity>
 
 
-        <CustomTextInput placeholder="Enter password" 
+        <CustomTextInput placeholder="Enter password"
         onChangeText={setPassword}
         error={errors.password} ></CustomTextInput>
         <CustomButton text={"Login"} onBtnPress={onBtnPress} widthDecrement={60} />
@@ -67,7 +80,7 @@ const Passwordvalidationemail = ({ route, navigation}) => {
           <View style={styles.line} />
 
         </View>
-        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
+        <CustomButton text={"Send OTP"} onBtnPress={onBtnsendOtp} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
         <Text style={{fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight:"bold", marginLeft: 170, margin: 20, width: windowWidth}}>Need Help</Text>
       </View>
     </>
@@ -82,7 +95,7 @@ const styles = StyleSheet.create({
   },
   textMobile: {
     color: '#303030',
-    fontSize: 16,
+    fontSize: SIZES.h2,
     marginLeft: 12,
     fontWeight: 'bold',
     fontFamily: FONTSTYLES.fontstying,
@@ -144,5 +157,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Passwordvalidationemail;
+export default PasswordValidationAgent;
 

@@ -1,4 +1,4 @@
-import React, {useState ,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,39 +8,34 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../Constraints/Generic';
-import GoogleReCaptcha from '../Common/GoogleReCaptcha';
+import {BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../../Constraints/Generic';
+import RenderWebView from "../../Common/GoogleReCaptcha"
 import axios from 'axios';
-import { postRequest } from '../Common/Api';
-import {WebView} from 'react-native-webview';
 
-const Login = ({navigation}) => {
-  const [mobileno, setMobileno] = useState("");
+const LoginAgent = ({navigation}) => {
+
+  
+  const [agentno, setAgentno] = useState('');
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
-  const url = 'https://diagnal-react-workshop.web.app/'
 
   useEffect(() => {
     validateForm();
-  }, [mobileno]);
+  }, [agentno]);
 
   const validateForm = () => {
     let errors = {};
 
-    if (!mobileno) {
-      errors.mobileno = "Mobile number is required.";
-    } else if (
-      !/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[7896]\d{9}|(\d[ -]?){10}\d$/.test(
-        mobileno
-      )
-    ) {
-      errors.mobileno = "Mobile number should only contain numbers.";
+    if (!agentno) {
+      errors.agentno = "Agent code is required.";
+    } else if (!/^[a-zA-Z0-9]{6}$/.test(agentno)) {
+      errors.agentno = "Agent code should be alphanumeric and exactly 6 characters long.";
     }
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
     
   }
-  
+
   const onBtnPress = async() => {
     if (!isFormValid) {
       Alert.alert('Error', 'Please  the fields correctly.');
@@ -48,7 +43,7 @@ const Login = ({navigation}) => {
     }
     const agentData = {
      
-      mobileNumber: mobileno,
+      agentCode: agentno,
       // password: password,
     };
   
@@ -73,11 +68,11 @@ const Login = ({navigation}) => {
     // Check the status code of the response
     if (response.status === 200) {
       // Successful registration
-      Alert.alert('Login with number', 'correct!',
+      Alert.alert('Login with code', 'correct!',
       [
         {
           text: 'OK',
-          onPress: () => navigation.navigate('Passwordvalidation', {mobileno: mobileno}),
+          onPress: () => navigation.navigate('PasswordValidationAgent', {agentno: agentno}),
         },
       ]
       );
@@ -105,7 +100,7 @@ const Login = ({navigation}) => {
         [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Passwordvalidation', {mobileno: mobileno}),
+            onPress: () => navigation.navigate('PasswordValidationAgent', {agentno: agentno}),
           },
         ]
       );
@@ -117,13 +112,13 @@ const Login = ({navigation}) => {
   }
     
   };
-
+  
   return (
     <>
       <View style={styles.container}>
         <Image
           style={{resizeMode: 'contain'}}
-          source={require('../assets/banner.png')}
+          source={require('../../assets/banner.png')}
         />
         <Text style={styles.text}>Welcome! Login to your account</Text>
         <View
@@ -138,15 +133,11 @@ const Login = ({navigation}) => {
             alignItems: 'center',
             marginHorizontal: 25,
           }}>
-          <View style={{alignSelf: 'left'}}>
-            <Text style={{fontSize: 18, color: '#303030', marginLeft: 10}}>
-              +91
-            </Text>
-          </View>
+     
           <TextInput
-            placeholder=" Enter Mobile Number"
-            value={mobileno}
-            onChangeText={newMobileno => setMobileno(newMobileno)}
+            placeholder="      Enter Agent Code"
+            value={agentno}
+            onChangeText={newagentno => setAgentno(newagentno)}
             style={{fontSize: 18, marginLeft: 5}}
             placeholderTextColor={COLORS.placeholderTextColor}
             cursorColor={'black'}
@@ -154,18 +145,21 @@ const Login = ({navigation}) => {
         </View>
         <View
           style={{
+            
             height: 90,
+            backgroundColor: 'white',
             marginTop: 20,
             top: 10,
-            width:windowWidth ,
+            marginLeft: 50,
+            width:windowWidth,
             resizeMode: "contain",
+            
            
           }}>
-           
-          <GoogleReCaptcha url={'http://127.0.0.1'} siteKey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}/>
           
+          <RenderWebView url={'https://diagnal-react-workshop.web.app/'}
           
-        
+        />
         </View>
         <TouchableOpacity
           onPress={onBtnPress}
@@ -183,7 +177,7 @@ const Login = ({navigation}) => {
           <View style={styles.iconConatiner}>
             <Image
               style={styles.icon}
-              source={require('../assets/chevrons-right.png')}
+              source={require('../../assets/chevrons-right.png')}
             />
             <Text
               style={{
@@ -201,8 +195,8 @@ const Login = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('EmailLogin')}>
             <Text style={styles.linkText}>Login with Email</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('LoginAgent')}>
-            <Text style={styles.linkText}>Login with Agent Code</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.linkText}>Login with mobile number</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -212,6 +206,7 @@ const Login = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     flex: 1,
   },
   btncontainer: {
@@ -254,4 +249,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LoginAgent;
