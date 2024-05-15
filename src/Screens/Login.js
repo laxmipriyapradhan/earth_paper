@@ -145,6 +145,7 @@ const Login = ({navigation}) => {
           </View>
           <TextInput
             placeholder=" Enter Mobile Number"
+            
             value={mobileno}
             onChangeText={newMobileno => setMobileno(newMobileno)}
             style={{fontSize: 18, marginLeft: 5}}
@@ -154,15 +155,17 @@ const Login = ({navigation}) => {
         </View>
         <View
           style={{
-            height: 90,
+            height: 150,
+            backgroundColor: 'white',
             marginTop: 20,
             top: 10,
             width:windowWidth ,
             resizeMode: "contain",
            
+           
           }}>
            
-          <GoogleReCaptcha url={'http://127.0.0.1'} siteKey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}/>
+          <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'} siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"}/>
           
           
         
@@ -176,7 +179,8 @@ const Login = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 10,
-            margin: 20,
+            marginLeft: 20,
+            bottom: 10,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -213,6 +217,7 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   btncontainer: {
     flex: 1,

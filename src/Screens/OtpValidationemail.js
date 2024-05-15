@@ -4,42 +4,74 @@ import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../Constra
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 import OTPTextView from 'react-native-otp-textinput';
+import { postRequest } from '../Common/Api';
 
 
 const OtpValidationemail = ({ route, navigation }) => {
     const { emailaddress } = route.params;
     const [showResend, setShowResend] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        let timeoutId;
+        let timerId;
 
-        const waitForOtp = () => {
-            timeoutId = setTimeout(() => {
+        const startTimer = () => {
+            timerId = setInterval(() => {
                 setShowResend(true);
             }, 30000);
         };
 
-        waitForOtp();
+        startTimer();
 
         return () => {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
+            clearInterval(timerId);
         };
-    }, [showResend]);
+    }, []);
 
-    const onBtnPress = () => {
-        navigation.navigate('Resetemail');
+    const onBtnPress = async() => {
+        if (!otp) {
+            setError('Please enter OTP');
+            return;
+        }
+        try {
+            // Make API call or perform other actions
+            await postRequest('otp/validate', {}, navigation, 'Resetemail');
+          } catch (error) {
+            console.error('postRequest error:', error);
+            // Handle errors from postRequest function
+          }
 
     }
+
+    const handleOtpChange = (otp) => {
+        setOtp(otp);
+        setError('');
+    }
+
     const onChangePress = () => {
-        navigation.navigate('EmailLogin', {emailaddress: emailaddress});
+        navigation.navigate('EmailLogin', {emailaddress:emailaddress});
     }
-    const onForgotbtnPress = () => {
-        console.log("hello world");
+
+    const onResendbtnPress = () => {
+        resendVerifyOTP()
     }
-    const resendVerifyOTP = () => {
-        console.log("hello world");
+
+    const resendVerifyOTP = async() => {
+        // Reset timer and hide resend option
+        setShowResend(false);
+        setTimeout(() => setShowResend(true), 30000);
+        try {
+            // Make API call or perform other actions
+           const response= await postRequest('otp/generate', {} );
+          
+           
+          } catch (error) {
+            console.error('postRequest error:', error);
+            // Handle errors from postRequest function
+          }
+
+       
     }
 
     return (
@@ -60,7 +92,7 @@ const OtpValidationemail = ({ route, navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.forgotText}>We’ve sent a One Time Password (OTP) to the email address above. Please enter it to complete verification</Text>
                     <Text style={styles.textplaceholder1}>Enter OTP</Text>
-                    <TouchableOpacity onPress={onForgotbtnPress}>
+                    <TouchableOpacity onPress={onResendbtnPress}>
                         {/* <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:25, marginLeft:340}]}>Resend</Text> */}
                         {showResend ? (
                             <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom: 25, marginLeft: 340 }]}>
@@ -80,10 +112,10 @@ const OtpValidationemail = ({ route, navigation }) => {
                     <OTPTextView
                         containerStyle={styles.otpContainer}
                         textInputStyle={styles.otpInput}
-                        handleTextChange={otp => console.log(otp)}
+                        handleTextChange={handleOtpChange}
                         inputCount={6}
                     />
-
+                    {error ? <Text style={{ color: 'red', marginLeft: 30, bottom: 20 }}>{error}</Text> : null}
                     <CustomButton text={"Submit"} onBtnPress={onBtnPress} widthDecrement={60} />
                     <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
                 </View>

@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, Alert } fro
 import { BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../Constraints/Generic';
 import RenderWebView from '../Common/GoogleReCaptcha';
 import axios from 'axios';
+import GoogleReCaptcha from '../Common/GoogleReCaptcha';
 
 
 
@@ -136,34 +137,33 @@ const EmailLogin = ({navigation}) => {
           <View
           style={{
             
-            height: 90,
+            height: 150,
             backgroundColor: 'white',
             marginTop: 20,
             top: 10,
-            marginLeft: 50,
-            width:windowWidth,
+            width:windowWidth ,
             resizeMode: "contain",
-            
            
           }}>
           
-          <RenderWebView url={'https://diagnal-react-workshop.web.app/'}
+          <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'} siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"}  />
           
-        />
+      
         </View>
       
       <TouchableOpacity
       onPress={onBtnPress}
       style={{
         width: windowWidth - 40, //change
-        height: 60,
-        backgroundColor: COLORS.btnPrimary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        margin: 20,
-        justifyContent: "center",
-        alignItems: "center"
+            height: 60,
+            backgroundColor: COLORS.btnPrimary,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 10,
+            marginLeft: 20,
+            bottom: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
       }}>
    <View style={styles.iconConatiner}>
       <Image style={styles.icon} source={require('../assets/chevrons-right.png')} />

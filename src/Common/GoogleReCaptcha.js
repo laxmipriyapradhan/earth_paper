@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import WebView from 'react-native-webview';
+import { COLORS, windowWidth } from '../Constraints/Generic';
 
 const patchPostMessageJsCode = `(${String(function () {
   var originalPostMessage = window.ReactNativeWebView.postMessage;
@@ -70,7 +71,7 @@ const GoogleReCaptcha = ({
 						outline: none;
 					}
           .g-recaptcha{
-            transform:scale(1.25);
+            transform:scale(1.18);
             transform-origin:0 0;
           }
 				</style>
@@ -94,11 +95,11 @@ const GoogleReCaptcha = ({
       ref={captchaForm}
       originWhitelist={['*']}
       mixedContentMode={'always'}
-      onMessage={e => console.log(e.nativeEvent.data)}
+   	  onMessage={e => console.log(e.nativeEvent.data)}
       javaScriptEnabled
       injectedJavaScript={patchPostMessageJsCode}
       automaticallyAdjustContentInsets
-      style={[{backgroundColor: 'transparent', width: '100%'}, style]}
+      style={[{backgroundColor: 'transparent', width: windowWidth, marginLeft: 15  }]}
       source={{
         html: generateTheWebViewContent(siteKey),
         baseUrl: `${url}`,

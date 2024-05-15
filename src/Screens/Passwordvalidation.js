@@ -21,13 +21,13 @@ const PasswordValidation = ({ route, navigation }) => {
   const onBtnPress = async () => {
     // Clear previous errors
     setErrors({});
-
+  
     // Validate password
     if (!password) {
       setErrors({ password: "Password is required." });
       return; // Prevent further execution
     }
-
+   // here login api end point will add
     try {
       // Make API call or perform other actions
       await postRequest('otp/generate', {}, navigation, 'Homepage');
@@ -35,6 +35,18 @@ const PasswordValidation = ({ route, navigation }) => {
       console.error('postRequest error:', error);
       // Handle errors from postRequest function
     }
+  }
+  
+  const onBtnsendOtp =async()=>{
+    
+    try {
+      // Make API call or perform other actions
+      await postRequest('otp/generate', {}, navigation, 'OtpValidation', { mobileno: mobileno });
+    } catch (error) {
+      console.error('postRequest error:', error);
+      // Handle errors from postRequest function
+    }
+  
   }
 
   return (
@@ -63,7 +75,7 @@ const PasswordValidation = ({ route, navigation }) => {
         <Text style={styles.textOr}>  or  </Text>
         <View style={styles.line} />
       </View>
-      <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
+      <CustomButton text={"Send OTP"} onBtnPress={onBtnsendOtp} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
       <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
     </View>
   );

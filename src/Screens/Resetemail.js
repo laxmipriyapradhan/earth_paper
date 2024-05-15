@@ -3,42 +3,45 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextCompone
 import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
+import { postRequest } from '../Common/Api';
 
 
-const Resetemail = ({navigation}) => {
+const Resetemail = ({ navigation }) => {
 
 
 
-    const onBtnPress = () => {
-        navigation.navigate('Homepage');
+    const onBtnPress = async () => {
+        try {
+            // Make API call or perform other actions
+            await postRequest('otp/reset', {}, navigation, 'EmailLogin');
+        } catch (error) {
+            console.error('postRequest error:', error);
+            // Handle errors from postRequest function
+        }
 
     }
     const onChangePress = () => {
         navigation.navigate('Login', mobileno);
     }
-    // const onForgotbtnPress = () => {
-    //     navigation.navigate('ForgotPassword');
 
-
-    // }
 
     return (
         <>
             <View style={styles.container}>
                 <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
                 <Text style={styles.text}>Set Password</Text>
-                <View style= {styles.textResetcontainer}>
-        
-                <Text style={styles.textplaceholder1}>Enter password</Text>
+                <View style={styles.textResetcontainer}>
 
-                <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
-                <View style= {styles.textResetChildcontainer}>
-                <Text style={styles.textplaceholder1}>Re-enter password</Text>
-                <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
-                <CustomButton text={"Reset"} onBtnPress={onBtnPress} widthDecrement={60} />
-               
-                <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
-                </View>
+                    <Text style={styles.textplaceholder1}>Enter password</Text>
+
+                    <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
+                    <View style={styles.textResetChildcontainer}>
+                        <Text style={styles.textplaceholder1}>Re-enter password</Text>
+                        <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput>
+                        <CustomButton text={"Reset"} onBtnPress={onBtnPress} widthDecrement={60} />
+
+                        <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
+                    </View>
                 </View>
             </View>
         </>
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-       
+
 
     },
     textMobile: {
@@ -121,11 +124,11 @@ const styles = StyleSheet.create({
         marginBottom: 15
 
     },
-    textResetcontainer:{
+    textResetcontainer: {
         flex: 1,
         bottom: 25
     },
-    textResetChildcontainer:{
+    textResetChildcontainer: {
         bottom: 40
 
     }

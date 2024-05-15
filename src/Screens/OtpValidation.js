@@ -4,44 +4,75 @@ import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../Constra
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 import OTPTextView from 'react-native-otp-textinput';
+import { postRequest } from '../Common/Api';
 
 
 const OtpValidation = ({ route, navigation }) => {
     const { mobileno } = route.params;
     const [showResend, setShowResend] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        let timeoutId;
+        let timerId;
 
-        const waitForOtp = () => {
-            timeoutId = setTimeout(() => {
+        const startTimer = () => {
+            timerId = setInterval(() => {
                 setShowResend(true);
             }, 30000);
         };
 
-        waitForOtp();
+        startTimer();
 
         return () => {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
+            clearInterval(timerId);
         };
-    }, [showResend]);
+    }, []);
 
-    const onBtnPress = () => {
-        navigation.navigate('Reset');
+    const onBtnPress = async() => {
+        if (!otp) {
+            setError('Please enter OTP');
+            return;
+        }
+        try {
+            // Make API call or perform other actions
+            await postRequest('otp/validate', {}, navigation, 'Reset');
+          } catch (error) {
+            console.error('postRequest error:', error);
+            // Handle errors from postRequest function
+          }
 
     }
+
+    const handleOtpChange = (otp) => {
+        setOtp(otp);
+        setError('');
+    }
+
     const onChangePress = () => {
-        navigation.navigate('Login', mobileno);
-    }
-    const onForgotbtnPress = () => {
-        console.log("hello world");
-    }
-    const resendVerifyOTP = () => {
-        console.log("hello world");
+        navigation.navigate('Login', {mobileno: mobileno});
     }
 
+    const onResendbtnPress = () => {
+        resendVerifyOTP()
+    }
+
+    const resendVerifyOTP = async() => {
+        // Reset timer and hide resend option
+        setShowResend(false);
+        setTimeout(() => setShowResend(true), 30000);
+        try {
+            // Make API call or perform other actions
+           const response= await postRequest('otp/generate', {} );
+         
+           
+          } catch (error) {
+            console.error('postRequest error:', error);
+            // Handle errors from postRequest function
+          }
+
+       
+    }
     return (
         <>
             <View style={styles.container}>
@@ -60,14 +91,15 @@ const OtpValidation = ({ route, navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.forgotText}>We’ve sent a One Time Password (OTP) to the mobile number above. Please enter it to complete verification</Text>
                     <Text style={styles.textplaceholder1}>Enter OTP</Text>
-                    <TouchableOpacity onPress={onForgotbtnPress}>
+                  
                         {/* <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:25, marginLeft:340}]}>Resend</Text> */}
                         {showResend ? (
+                              <TouchableOpacity onPress={onResendbtnPress}>
                             <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom: 25, marginLeft: 340 }]}>
 
                                 Resend
                             </Text>
-
+                            </TouchableOpacity>
                         ) : (
 
                             <Text style={[styles.linkText1, { color: COLORS.btnPrimary, bottom: 20, marginLeft: 220 }]}>
@@ -75,15 +107,16 @@ const OtpValidation = ({ route, navigation }) => {
                                 <Text style={{ color: 'red' }}>30</Text> secs
                             </Text>
                         )}
-                    </TouchableOpacity>
+                  
 
                     <OTPTextView
                         containerStyle={styles.otpContainer}
                         textInputStyle={styles.otpInput}
-                        handleTextChange={otp => console.log(otp)}
+                        handleTextChange={handleOtpChange}
+                       
                         inputCount={6}
                     />
-
+                    {error ? <Text style={{ color: 'red', marginLeft: 30, bottom: 20 }}>{error}</Text> : null}
                     <CustomButton text={"Submit"} onBtnPress={onBtnPress} widthDecrement={60} />
                     <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
                 </View>

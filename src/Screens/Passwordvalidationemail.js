@@ -27,7 +27,7 @@ const Passwordvalidationemail = ({ route, navigation}) => {
     setErrors({ password: "Password is required." });
     return; // Prevent further execution
   }
-
+ // here login api end point will add
   try {
     // Make API call or perform other actions
     await postRequest('otp/generate', {}, navigation, 'Homepage');
@@ -35,6 +35,18 @@ const Passwordvalidationemail = ({ route, navigation}) => {
     console.error('postRequest error:', error);
     // Handle errors from postRequest function
   }
+}
+
+const onBtnsendOtp =async()=>{
+  
+  try {
+    // Make API call or perform other actions
+    await postRequest('otp/generate', {}, navigation, 'OtpValidationAgent', { emailaddress: emailaddress });
+  } catch (error) {
+    console.error('postRequest error:', error);
+    // Handle errors from postRequest function
+  }
+
 }
   return (
     <>
@@ -67,7 +79,7 @@ const Passwordvalidationemail = ({ route, navigation}) => {
           <View style={styles.line} />
 
         </View>
-        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
+        <CustomButton text={"Send OTP"} onBtnPress={onBtnsendOtp} widthDecrement={60} bgColor={COLORS.primary} btnTextColor={COLORS.btnPrimary} borderBtnColor={COLORS.btnPrimary} borderbtnWidth={1.5} />
         <Text style={{fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight:"bold", marginLeft: 170, margin: 20, width: windowWidth}}>Need Help</Text>
       </View>
     </>

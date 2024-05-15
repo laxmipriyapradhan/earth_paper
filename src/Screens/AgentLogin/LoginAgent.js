@@ -11,6 +11,7 @@ import {
 import {BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../../Constraints/Generic';
 import RenderWebView from "../../Common/GoogleReCaptcha"
 import axios from 'axios';
+import GoogleReCaptcha from '../../Common/GoogleReCaptcha';
 
 const LoginAgent = ({navigation}) => {
 
@@ -146,19 +147,18 @@ const LoginAgent = ({navigation}) => {
         <View
           style={{
             
-            height: 90,
+            height: 150,
             backgroundColor: 'white',
             marginTop: 20,
             top: 10,
-            marginLeft: 50,
-            width:windowWidth,
+            width:windowWidth ,
             resizeMode: "contain",
             
            
           }}>
           
-          <RenderWebView url={'https://diagnal-react-workshop.web.app/'}
-          
+          <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'}
+          siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"}
         />
         </View>
         <TouchableOpacity
@@ -170,7 +170,8 @@ const LoginAgent = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 10,
-            margin: 20,
+            marginLeft: 20,
+            bottom: 10,
             justifyContent: 'center',
             alignItems: 'center',
           }}>

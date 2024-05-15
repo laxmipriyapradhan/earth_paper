@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   dot: {
-    width: 15,
-    height: 7,
-    borderRadius: 6,
+    width: 10,
+    height: 10,
+    borderRadius: 10,
     marginHorizontal: 3,
   },
   dotActive: {

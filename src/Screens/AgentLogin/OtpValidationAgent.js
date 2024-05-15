@@ -62,8 +62,9 @@ const OtpValidationAgent = ({ route, navigation }) => {
         setTimeout(() => setShowResend(true), 30000);
         try {
             // Make API call or perform other actions
-            await postRequest('otp/generate', {}, navigation, 'ResetAgent');
-            console.log("Response",Response);
+           await postRequest('otp/generate', {} );
+    
+           
           } catch (error) {
             console.error('postRequest error:', error);
             // Handle errors from postRequest function
@@ -71,7 +72,6 @@ const OtpValidationAgent = ({ route, navigation }) => {
 
        
     }
-
     return (
         <>
             <View style={styles.container}>
