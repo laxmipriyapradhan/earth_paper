@@ -19,7 +19,7 @@ const Login = ({navigation}) => {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const url = 'https://diagnal-react-workshop.web.app/'
-
+ // updated code
   useEffect(() => {
     validateForm();
   }, [mobileno]);
