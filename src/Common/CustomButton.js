@@ -15,7 +15,7 @@ const CustomButton = ({ text, onBtnPress, widthDecrement, bgColor ,btnTextColor,
       onPress={onBtnPress}
       style={{
         width: windowWidth - widthDecrement,
-        height: 50,
+        height: 40,
         backgroundColor: bgColor ? bgColor : COLORS.btnPrimary,
         alignItems: 'center',
         justifyContent: 'center',

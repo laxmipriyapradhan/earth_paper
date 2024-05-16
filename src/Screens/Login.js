@@ -8,17 +8,19 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {BASE_URL, COLORS, FONTSTYLES, windowWidth} from '../Constraints/Generic';
+import {BASE_URL, COLORS, FONTSTYLES, textHaeder, windowWidth} from '../Constraints/Generic';
 import GoogleReCaptcha from '../Common/GoogleReCaptcha';
 import axios from 'axios';
-import { postRequest } from '../Common/Api';
-import {WebView} from 'react-native-webview';
+import CustomTextHeader from '../Common/CustomTextHeader';
+import CustomTextInput from '../Common/CustomTextInput';
+import CustomButton from '../Common/CustomButton';
 
 const Login = ({navigation}) => {
   const [mobileno, setMobileno] = useState("");
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
-  const url = 'https://diagnal-react-workshop.web.app/'
+  const [isSelected, setSelection] = useState(false);
+
  // updated code
   useEffect(() => {
     validateForm();
@@ -125,44 +127,26 @@ const Login = ({navigation}) => {
           style={{resizeMode: 'contain'}}
           source={require('../assets/banner.png')}
         />
-        <Text style={styles.text}>Welcome! Login to your account</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-
-            borderRadius: 10,
-            borderWidth: 2,
-            borderColor: '#DADADA',
-            height: 60,
-            fontSize: 20,
-            alignItems: 'center',
-            marginHorizontal: 25,
-          }}>
-          <View style={{alignSelf: 'left'}}>
-            <Text style={{fontSize: 18, color: '#303030', marginLeft: 10}}>
-              +91
-            </Text>
-          </View>
-          <TextInput
-            placeholder=" Enter Mobile Number"
-            
-            value={mobileno}
-            onChangeText={newMobileno => setMobileno(newMobileno)}
-            style={{fontSize: 18, marginLeft: 5}}
-            placeholderTextColor={COLORS.placeholderTextColor}
-            cursorColor={'black'}
-          />
-        </View>
+        {/* <Text style={styles.text}>Welcome! Login to your account</Text> */}
+        <Text style={styles.text}>{textHaeder.textHaeder1}</Text>
+        <CustomTextInput
+        textprefix={"+91"}
+        placeholder="Enter Mobile number"
+        value={mobileno}
+        onChangeText={setMobileno}
+        linksText={"Login with Email ID"}
+        error={errors.mobileno} 
+       
+      />
         <View
           style={{
             height: 150,
             backgroundColor: 'white',
-            marginTop: 20,
-            top: 10,
+            marginTop: 10,
+            marginHorizontal:10,
             width:windowWidth ,
             resizeMode: "contain",
-           
-           
+            
           }}>
            
           <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'} siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"}/>
@@ -170,45 +154,10 @@ const Login = ({navigation}) => {
           
         
         </View>
-        <TouchableOpacity
-          onPress={onBtnPress}
-          style={{
-            width: windowWidth - 40, //change
-            height: 60,
-            backgroundColor: COLORS.btnPrimary,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 10,
-            marginLeft: 20,
-            bottom: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={styles.iconConatiner}>
-            <Image
-              style={styles.icon}
-              source={require('../assets/chevrons-right.png')}
-            />
-            <Text
-              style={{
-                color: 'white',
-                fontWeight: '600',
-                fontSize: 18,
-                marginLeft: 80,
-              }}>
-              Send OTP
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        <View style={styles.linksContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('EmailLogin')}>
-            <Text style={styles.linkText}>Login with Email</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('LoginAgent')}>
-            <Text style={styles.linkText}>Login with Agent Code</Text>
-          </TouchableOpacity>
-        </View>
+        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={50}  />
+        
+        
+      
       </View>
     </>
   );
@@ -218,6 +167,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    
   },
   btncontainer: {
     flex: 1,
@@ -235,17 +185,8 @@ const styles = StyleSheet.create({
   textplaceholder: {
     color: '#BDC0C7',
   },
-  linksContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: windowWidth,
-    paddingHorizontal: 20, // Add horizontal padding to space out the links
-  },
-  linkText: {
-    color: '#303030',
-    fontSize: 16,
-    textDecorationLine: 'underline',
-  },
+
+ 
   iconConatiner: {
     flex: 1,
     justifyContent: 'center',

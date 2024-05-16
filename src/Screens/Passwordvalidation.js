@@ -67,7 +67,7 @@ const PasswordValidation = ({ route, navigation }) => {
         placeholder="Enter password"
         value={password}
         onChangeText={setPassword}
-        error={errors.password} // Pass error message to display
+        error={errors.password} 
       />
       <CustomButton text={"Login"} onBtnPress={onBtnPress} widthDecrement={60} />
       <View style={styles.orContainer}>
