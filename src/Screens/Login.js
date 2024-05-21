@@ -1,165 +1,116 @@
-import React, {useState ,useEffect} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
-import {BASE_URL, COLORS, FONTSTYLES, textHaeder, windowWidth} from '../Constraints/Generic';
-import GoogleReCaptcha from '../Common/GoogleReCaptcha';
+// Login.js
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
-import CustomTextHeader from '../Common/CustomTextHeader';
 import CustomTextInput from '../Common/CustomTextInput';
 import CustomButton from '../Common/CustomButton';
+import SvgComponent from '../assets/Svg_Image/App_Header';
+import GoogleReCaptcha from '../Common/GoogleReCaptcha';
+import { Checkbox } from 'react-native-paper';
+import { BASE_URL, COLORS, FONTSTYLES, SIZES, TEXTHEADING, windowHeight, windowWidth } from '../Constraints/Generic';
+import CustomCheckBox from '../Common/CustomCheck';
 
-const Login = ({navigation}) => {
+const Login = ({ navigation, route }) => {
+  const { screenName } = route.params || { screenName: 'Mobile' };
   const [mobileno, setMobileno] = useState("");
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isSelected, setSelection] = useState(false);
+  const [checked, setChecked] = React.useState(false);
+  const [togglePlaceholder, setTogglePlaceholder] = useState(screenName === 'Email');
 
- // updated code
-  useEffect(() => {
-    validateForm();
-  }, [mobileno]);
+  const handleClick = () => {
+    setTogglePlaceholder(!togglePlaceholder);
+    navigation.setParams({ screenName: togglePlaceholder ? 'Mobile' : 'Email' });
+  };
 
   const validateForm = () => {
     let errors = {};
 
-    if (!mobileno) {
-      errors.mobileno = "Mobile number is required.";
-    } else if (
-      !/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[7896]\d{9}|(\d[ -]?){10}\d$/.test(
-        mobileno
-      )
-    ) {
-      errors.mobileno = "Mobile number should only contain numbers.";
+    if (togglePlaceholder) {
+      if (!email) {
+        errors.email = "Email ID is required.";
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        errors.email = "Invalid email format.";
+      }
+    } else {
+      if (!mobileno) {
+        errors.mobileno = "Mobile number is required.";
+      } else if (!/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[7896]\d{9}|(\d[ -]?){10}\d$/.test(mobileno)) {
+        errors.mobileno = "Mobile number should only contain numbers.";
+      }
     }
-    setErrors(errors);
-    setIsFormValid(Object.keys(errors).length === 0);
-    
-  }
-  
-  const onBtnPress = async() => {
-    if (!isFormValid) {
-      Alert.alert('Error', 'Please  the fields correctly.');
-      return;
-    }
-    const agentData = {
-     
-      mobileNumber: mobileno,
-      // password: password,
-    };
-  
-  try {
-    console.log("agentData", agentData);
-    
 
-    const response = await axios.post(
-      `${BASE_URL}login/search`,
-      agentData,
-      {
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const onBtnPress = async () => {
+    if (!validateForm()) return;
+
+    const agentData = togglePlaceholder ? { email: email } : { mobileNumber: mobileno }
+    console.log(agentData);
+
+    try {
+      const response = await axios.post(`${BASE_URL}login/search`, agentData, {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
           requestUID: '4e8ea3bb-b55b-4a6f-ad03-741fee6836c6'
         },
-      }
-    );
-  
-    console.log('response', response.data);
-  
-    // Check the status code of the response
-    if (response.status === 200) {
-      // Successful registration
-      Alert.alert('Login with number', 'correct!',
-      [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('Passwordvalidation', {mobileno: mobileno}),
-        },
-      ]
-      );
+      });
     
-      console.log("response", response);
-      // You may navigate to another screen or perform additional actions here
-    } else {
-      // Handle other status codes
-      console.error('Unexpected status code', response.status);
-      Alert.alert(
-        'Error',
-        'An error occurred while processing your request. Please try again.',
-      
-      );
-    }
-  } catch (error) {
-    // console.error('API request failed', error);
-  
-    // Check if the error has a response object
-    if (error.response && error.response.status === 400) {
-      
-      Alert.alert(
-        'Agent Exists',
-
-        [
+      if (response.status === 200) {
+        if (togglePlaceholder) {
+          Alert.alert('Login Successful', 'correct!', [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('Passwordvalidationemail', { email: email }),
+            },
+          ]);
+        } else {
+          Alert.alert('Login Successful', 'correct!', [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('OtpValidation', { mobileno }),
+            },
+          ]);
+        }
+      } else {
+        Alert.alert('Error', 'An error occurred while processing your request. Please try again.');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        Alert.alert('Agent Exists', [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Passwordvalidation', {mobileno: mobileno}),
+            onPress: () => navigation.navigate('Passwordvalidation', { mobileno }),
           },
-        ]
-      );
-    
-    } else {
-      // Handle other errors
-      Alert.alert('Error', 'An error occurred while processing your request.');
+        ]);
+      } else {
+        Alert.alert('Error', 'An error occurred while processing your request.');
+      }
     }
-  }
-    
   };
 
   return (
-    <>
-      <View style={styles.container}>
-        <Image
-          style={{resizeMode: 'contain'}}
-          source={require('../assets/banner.png')}
-        />
-        {/* <Text style={styles.text}>Welcome! Login to your account</Text> */}
-        <Text style={styles.text}>{textHaeder.textHaeder1}</Text>
-        <CustomTextInput
-        textprefix={"+91"}
-        placeholder="Enter Mobile number"
-        value={mobileno}
-        onChangeText={setMobileno}
+    <View style={styles.container}>
+      <SvgComponent />
+      <Text style={styles.text}>{TEXTHEADING.textHeader}</Text>
+      <CustomTextInput
+        textprefix={togglePlaceholder ? "" : "+91"}
+        label={togglePlaceholder ? "Enter Email ID" : "Enter Mobile number"}
+        value={togglePlaceholder ? email : mobileno}
+        onChangeText={togglePlaceholder ? setEmail : setMobileno}
         linksText={"Login with Email ID"}
-        error={errors.mobileno} 
-       
+        error={togglePlaceholder ? errors.email : errors.mobileno}
+        handleClick={handleClick}
       />
-        <View
-          style={{
-            height: 150,
-            backgroundColor: 'white',
-            marginTop: 10,
-            marginHorizontal:10,
-            width:windowWidth ,
-            resizeMode: "contain",
-            
-          }}>
-           
-          <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'} siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"}/>
-          
-          
-        
-        </View>
-        <CustomButton text={"Send OTP"} onBtnPress={onBtnPress} widthDecrement={50}  />
-        
-        
-      
+      <View style={{ height: 100, backgroundColor: 'white', marginTop: 10, marginHorizontal: 10, width: windowWidth, resizeMode: "contain" }}>
+        <GoogleReCaptcha url={'https://diagnal-react-workshop.web.app/'} siteKey={"6Ld77tgpAAAAALLcXBoa_Yc11n6GBsSBjmRIS8mG"} />
       </View>
-    </>
+      <CustomCheckBox label= {TEXTHEADING.textTerms} textlabel={TEXTHEADING.textLabel} textandLabel={TEXTHEADING.textandlabel} additionallabel={TEXTHEADING.additionalLabel} />
+      <CustomButton text={togglePlaceholder ? "Enter Password" : "Send OTP"} onBtnPress={onBtnPress} widthDecrement={50} />
+    </View>
   );
 };
 
@@ -167,36 +118,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    
-  },
-  btncontainer: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
+    height: windowHeight,
+    width: windowWidth,
+   
   },
   text: {
     color: COLORS.textColor1,
-    fontSize: 20,
-    margin: 30,
+    fontSize: SIZES.h1,
+    margin: 20,
     fontWeight: 'bold',
-    fontFamily: FONTSTYLES.fontstying,
-  },
-
-  textplaceholder: {
-    color: '#BDC0C7',
-  },
-
- 
-  iconConatiner: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  icon: {
-    resizeMode: 'cover',
-
-    marginLeft: -120,
+    fontFamily: FONTSTYLES.fontstyling,
   },
 });
 

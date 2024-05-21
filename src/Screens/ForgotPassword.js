@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
+import { COLORS, FONTSTYLES, SIZES, TEXTHEADING, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
+import CustomText from '../Common/CustomText';
 
 
 const ForgotPassword = ({ route, navigation }) => {
+    const { screenName } = route.params || { screenName: 'Mobile' };
+    const [togglePlaceholder, setTogglePlaceholder] = useState(screenName === 'Email');
     const { mobileno: initialMobileno } = route.params;
     const [mobileno, setMobileno] = useState(initialMobileno);
-   
+    const [errors, setErrors] = useState({});
 
     const onBtnPress = () => {
-        navigation.navigate('OtpValidation', {mobileno: mobileno });
+        navigation.navigate('OtpValidationemail', { mobileno: mobileno });
+        console.log("han bhai a ra h ", mobileno);
 
     }
-    const onChangePress = () => {
-        navigation.navigate('Login', mobileno);
-    }
+    // const onChangePress = () => {
+    //     navigation.navigate('Login', mobileno);
+    // }
 
 
     return (
@@ -24,16 +28,23 @@ const ForgotPassword = ({ route, navigation }) => {
             <View style={styles.container}>
                 <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
                 <Text style={styles.text}>Forgot Password</Text>
-                <Text style={styles.forgotText}>Enter the email address or mobile phone number associated with your galaxy account.</Text>
+                <Text style={styles.forgotText}>{TEXTHEADING.textForgotpara}</Text>
                 <View style={styles.linksContainer}>
 
                 </View>
-                <Text style={styles.textplaceholder1}>Email address or Mobile Number</Text>
 
-                <CustomTextInput value={mobileno} placeholderTextColor1= {COLORS.textColor1}></CustomTextInput>
+                <CustomTextInput
+                    textprefix={togglePlaceholder ? "" : "+91"}
+                    label={TEXTHEADING.textForgotplaceholder}
+                    value={togglePlaceholder ? email : mobileno}
+                    onChangeText={togglePlaceholder ? setEmail : setMobileno}
+
+                    error={togglePlaceholder ? errors.email : errors.mobileno}
+
+                />
                 <CustomButton text={"Reset password"} onBtnPress={onBtnPress} widthDecrement={60} />
 
-                <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
+                <CustomText />
             </View>
         </>
     );
@@ -62,11 +73,11 @@ const styles = StyleSheet.create({
         fontFamily: FONTSTYLES.fontstying,
     },
     forgotText: {
-        color: COLORS.textColor1,
+        color: COLORS.btnborderprimary,
         fontSize: SIZES.h3,
         margin: 27,
         fontWeight: 'bold',
-        fontFamily: FONTSTYLES.fontstying,
+        fontFamily: FONTSTYLES.fontstyling,
     },
 
 

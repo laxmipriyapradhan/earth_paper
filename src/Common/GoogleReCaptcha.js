@@ -99,7 +99,7 @@ const GoogleReCaptcha = ({
       javaScriptEnabled
       injectedJavaScript={patchPostMessageJsCode}
       automaticallyAdjustContentInsets
-      style={[{backgroundColor: 'transparent', width: windowWidth, marginHorizontal:13,  }]}
+      style={[{backgroundColor: 'transparent', width: windowWidth, marginHorizontal:8,  }]}
       source={{
         html: generateTheWebViewContent(siteKey),
         baseUrl: `${url}`,

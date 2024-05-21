@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, TextComponent } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../Constraints/Generic';
+import { COLORS, FONTSTYLES, SIZES, TEXTHEADING, windowHeight, windowWidth } from '../Constraints/Generic';
 import CustomButton from '../Common/CustomButton';
 import CustomTextInput from '../Common/CustomTextInput';
 import OTPTextView from 'react-native-otp-textinput';
 import { postRequest } from '../Common/Api';
+import CustomText from '../Common/CustomText';
 
 
 const OtpValidationemail = ({ route, navigation }) => {
-    const { emailaddress } = route.params;
+    
+    const { mobileno } = route.params || {};
+    console.log("hnnn", mobileno);
+    
     const [showResend, setShowResend] = useState(false);
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
@@ -36,7 +40,7 @@ const OtpValidationemail = ({ route, navigation }) => {
         }
         try {
             // Make API call or perform other actions
-            await postRequest('otp/validate', {}, navigation, 'Resetemail');
+            await postRequest('otp/validate', {}, navigation, 'Reset');
           } catch (error) {
             console.error('postRequest error:', error);
             // Handle errors from postRequest function
@@ -50,7 +54,7 @@ const OtpValidationemail = ({ route, navigation }) => {
     }
 
     const onChangePress = () => {
-        navigation.navigate('EmailLogin', {emailaddress:emailaddress});
+        navigation.navigate('Login', {mobileno: mobileno});
     }
 
     const onResendbtnPress = () => {
@@ -81,17 +85,23 @@ const OtpValidationemail = ({ route, navigation }) => {
                 <Text style={styles.text}>Authentication required</Text>
                 <View style={styles.linksContainer}>
 
-                    <Text style={styles.textMobile}>{emailaddress}</Text>
+                    <Text style={styles.textMobile}>{"+91"+ mobileno}</Text>
 
 
                     <TouchableOpacity onPress={onChangePress}>
-                        <Text style={[styles.linkText, { color: COLORS.btnPrimary }]}>Change</Text>
+                        <Text style={[styles.linkText, {textDecorationLine: 'underline', }]}>Change</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.textContainer}>
-                    <Text style={styles.forgotText}>We’ve sent a One Time Password (OTP) to the email address above. Please enter it to complete verification</Text>
-                    <Text style={styles.textplaceholder1}>Enter OTP</Text>
+                    <Text style={styles.forgotText}>{TEXTHEADING.textReset}</Text>
+                    {/* <Text style={styles.textplaceholder1}>Enter OTP</Text> */}
+                    <OTPTextView
+                        containerStyle={styles.otpContainer}
+                        textInputStyle={styles.otpInput}
+                        handleTextChange={handleOtpChange}
+                        inputCount={6}
+                    />
                     <TouchableOpacity onPress={onResendbtnPress}>
                         {/* <Text style={[styles.linkText, { color: COLORS.btnPrimary, bottom:25, marginLeft:340}]}>Resend</Text> */}
                         {showResend ? (
@@ -109,15 +119,10 @@ const OtpValidationemail = ({ route, navigation }) => {
                         )}
                     </TouchableOpacity>
 
-                    <OTPTextView
-                        containerStyle={styles.otpContainer}
-                        textInputStyle={styles.otpInput}
-                        handleTextChange={handleOtpChange}
-                        inputCount={6}
-                    />
+                    
                     {error ? <Text style={{ color: 'red', marginLeft: 30, bottom: 20 }}>{error}</Text> : null}
                     <CustomButton text={"Submit"} onBtnPress={onBtnPress} widthDecrement={60} />
-                    <Text style={{ fontSize: SIZES.h2, color: COLORS.btnPrimary, fontWeight: "bold", marginLeft: 170, margin: 20, width: windowWidth }}>Need Help</Text>
+                   <CustomText/>
                 </View>
             </View>
 
@@ -134,18 +139,17 @@ const styles = StyleSheet.create({
 
     },
     textMobile: {
-        color: '#303030',
-        fontSize: 12,
-        marginLeft: 12,
-        fontWeight: 'bold',
-        fontFamily: FONTSTYLES.fontstying,
-
+        color: COLORS.secondary,
+        fontSize: SIZES.h2,
+        marginLeft: 5,
+        fontWeight:"bold",
+        fontFamily: FONTSTYLES.fontstyling,
 
     },
 
 
     forgotText: {
-        color: COLORS.secondary,
+        color: COLORS.btnborderprimary,
         fontSize: SIZES.h3,
 
         padding: 25,
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         margin: 20,
         fontWeight: 'bold',
-        fontFamily: FONTSTYLES.fontstying,
+        fontFamily: FONTSTYLES.fontstyling,
     },
     textContainer: {
         flex: 1,
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
     linkText: {
         color: COLORS.textColor1,
         fontSize: 16,
-        textDecorationLine: 'underline',
+        color: COLORS.primary 
 
     },
     linkText1: {
@@ -222,12 +226,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     otpInput: {
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         borderWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: COLORS.btnborderprimary,
         borderRadius: 5,
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: SIZES.h1,
 
     },
 

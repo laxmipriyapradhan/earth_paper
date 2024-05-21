@@ -20,6 +20,7 @@ import PasswordValidationAgent from './src/Screens/AgentLogin/PasswordValidation
 import ForgotPasswordAgent from './src/Screens/AgentLogin/ForgotPasswordAgent';
 import OtpValidationAgent from './src/Screens/AgentLogin/OtpValidationAgent';
 import ResetAgent from './src/Screens/AgentLogin/ResetAgent';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -33,7 +34,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <PaperProvider>
       <StatusBar translucent backgroundColor="transparent" />
       <NavigationContainer>
         <Stack.Navigator>
@@ -67,7 +68,6 @@ const App = () => {
             component={ForgotPassword}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name="Passwordvalidationemail"
             component={Passwordvalidationemail}
@@ -123,10 +123,10 @@ const App = () => {
             component={ResetAgent}
             options={{ headerShown: false }}
           />
-
+          
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </PaperProvider>
   );
 };
 
