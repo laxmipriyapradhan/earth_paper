@@ -35,19 +35,20 @@ const Reset = ({ navigation }) => {
             <View style={styles.container}>
                 <Image style={{ resizeMode: "contain" }} source={require('../assets/banner.png')} />
                 <Text style={styles.text}>Set Password</Text>
+                
                 <View style={styles.textResetcontainer}>
 
-                    {/* <Text style={styles.textplaceholder1}>Enter password</Text> */}
 
-                    {/* <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput> */}
                     <CustomTextInput label={"Enter Password"}  placeholder={"At least 6 Characters"}/>
                     <View style={styles.textResetChildcontainer}>
-                        {/* <Text style={styles.textplaceholder1}>Re-enter password</Text> */}
-                        {/* <CustomTextInput placeholder="at least 6 characters" placeholderTextColor1={COLORS.placeholderTextColor1}></CustomTextInput> */}
+                        
+ 
                         <CustomTextInput label={"Re-Enter Password"} placeholder={"At least 6 Characters"}/>
+                        
                         <CustomButton text={TEXTHEADING.textsetPassword} onBtnPress={onBtnPress} widthDecrement={60} />
-
-                        <CustomText/>
+                        
+                      <CustomText/>  
+                      
                     </View>
                 </View>
             </View>
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
         color: '#303030',
         fontSize: 20,
         marginHorizontal: 25,
-        marginBottom: 20,
+        // marginBottom: 20,
         fontWeight: 'bold',
         fontFamily: FONTSTYLES.fontstyling,
     },
@@ -75,11 +76,13 @@ const styles = StyleSheet.create({
    
     textResetcontainer: {
         flex: 1,
-        justifyContent: "space-between",
+        
+
+        // justifyContent: "space-between",
        
     },
     textResetChildcontainer: {
-       marginVertical:20,
+    marginVertical:20,
 
     }
 });
