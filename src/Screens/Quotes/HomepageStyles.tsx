@@ -1,4 +1,3 @@
-// HomepageStyles.js
 import { StyleSheet } from 'react-native';
 import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../../Constraints/Generic';
 
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
   btnchild: {
     marginHorizontal: 170,
     bottom: 65,
-    
+
   },
   itemContainer: {
     flexDirection: 'row',
@@ -177,26 +176,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 200
-    
+
   },
   ModalText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '95%',
-    marginBottom: 20, 
+    marginBottom: 20,
   },
   inputContainer: {
     marginVertical: 10,
     width: '100%',
     marginRight: 40,
-    
+
 
   },
   keyboardAvoidingView: {
     flex: 1,
   },
-  textConatiner:{
+  textConatiner: {
     marginRight: 280
   },
   shareContainer: {
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 30, 
+    marginRight: 30,
   },
   textContainer: {
     marginLeft: 8,
@@ -218,19 +217,46 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 80
-    
+
   },
-  btnModalConatiner:{
+  btnModalConatiner: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:"center",
+    alignItems: "center",
     width: "auto"
-    
+
   },
-  btnModalview:{
+  btnModalview: {
     marginLeft: -30
+  },
+  ContentContainerModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+  ContentContainerView:
+  {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  ContentChildView:
+  {
+    backgroundColor: 'black',
+    padding: 30,
+    zIndex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between", 
+    width: "90%", 
+    borderRadius: 10, 
+    marginTop: "150%"
   }
-  
+
+
 });
 
 export default styles;

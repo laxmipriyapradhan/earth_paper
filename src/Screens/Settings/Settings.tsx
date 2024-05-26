@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const GetQuote = () => {
+const Settings = () => {
   return (
     <View>
-      <Text>GetQuote</Text>
+      <Text>Settings</Text>
     </View>
   )
 }
 
-export default GetQuote
+export default Settings
