@@ -11,7 +11,7 @@ type Props = {
 
 const QuoteStatusContainer: React.FC<Props> = ({ headerText, footerText, children }) => {
   return (
-    <View style={styles.QuoateStatusContainer}>
+    <View style={styles.QuoteStatusContainer}>
       <View style={styles.headerContainer}>
         <Text style={styles.textstyle}>{headerText}</Text>
       </View>
