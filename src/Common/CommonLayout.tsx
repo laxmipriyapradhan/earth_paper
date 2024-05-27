@@ -1,6 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle, Text, TouchableOpacity } from 'react-native';
-import { COLORS } from '../Constraints/Generic';
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import {COLORS} from '../Constraints/Generic';
 import ArrowSvg from '../assets/SVG/ArrowSvg';
 
 interface CommonLayoutProps {
@@ -8,12 +14,18 @@ interface CommonLayoutProps {
   blueSectionStyle?: ViewStyle;
   whiteSectionStyle?: ViewStyle;
   blueSectionText?: string;
-  ArrowSVG?: React.ComponentType<{ onPress: () => void }>; 
-  goBack: () => void;
+  ArrowSVG?: React.ComponentType<{onPress: () => void}>;
+  goBack?: any;
 }
 
-const CommonLayout: React.FC<CommonLayoutProps> = ({ children, blueSectionStyle, whiteSectionStyle, blueSectionText, ArrowSVG, goBack }) => {
-  
+const CommonLayout: React.FC<CommonLayoutProps> = ({
+  children,
+  blueSectionStyle,
+  whiteSectionStyle,
+  blueSectionText,
+  ArrowSVG,
+  goBack = {},
+}) => {
   return (
     <View style={styles.container}>
       <View style={[styles.blueSection, blueSectionStyle]}>
@@ -21,12 +33,12 @@ const CommonLayout: React.FC<CommonLayoutProps> = ({ children, blueSectionStyle,
           <TouchableOpacity onPress={goBack}>
             {ArrowSVG && <ArrowSVG onPress={goBack} />}
           </TouchableOpacity>
-          {blueSectionText && <Text style={styles.blueSectionText}>{blueSectionText}</Text>}
+          {blueSectionText && (
+            <Text style={styles.blueSectionText}>{blueSectionText}</Text>
+          )}
         </View>
       </View>
-      <View style={[styles.whiteSection, whiteSectionStyle]}>
-        {children}
-      </View>
+      <View style={[styles.whiteSection, whiteSectionStyle]}>{children}</View>
     </View>
   );
 };
@@ -45,7 +57,7 @@ const styles = StyleSheet.create({
   blueSectionContent: {
     flexDirection: 'row', // Align arrow and text in a row
     alignItems: 'center', // Center vertically
-    marginTop: 30
+    marginTop: 30,
   },
   blueSectionText: {
     color: COLORS.AppColor,
