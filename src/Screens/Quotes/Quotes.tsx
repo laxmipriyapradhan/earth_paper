@@ -26,7 +26,7 @@ const Quotes: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       // Replace this with actual data fetching logic
-      const data = Array.from({ length: 5 }, (_, index) => ({
+      const data = Array.from({ length: 1}, (_, index) => ({
         id: (index + 1).toString(),
         headerText: 'Quotes Stats',
         footerText: `Last updated: ${new Date().toLocaleTimeString()} today`,
@@ -43,18 +43,19 @@ const Quotes: React.FC<Props> = ({ navigation }) => {
   return (
     <CommonLayout blueSectionText="Manage Quote">
       <FlatList
-  contentContainerStyle={styles.QuotesContainer}
-  data={quotesData}
-  renderItem={renderItem}
-  keyExtractor={(item) => item.id}
-  initialNumToRender={10} // Initial number of items to render
-  maxToRenderPerBatch={10} // Maximum number of items to render per batch
-  windowSize={25} // Number of items outside of the visible area to keep rendered
-  onEndReachedThreshold={10} // Percentage of the end of the list to trigger onEndReached
-  onEndReached={() => {
-    // Load more data here if needed
-  }}
-/>
+        contentContainerStyle={styles.QuotesContainer}
+        data={quotesData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        initialNumToRender={10} 
+        maxToRenderPerBatch={10}
+        windowSize={25}
+        onEndReachedThreshold={10}
+        onEndReached={() => {
+          
+        }}
+      />
+      <QuoteStatusContainer/>
       <View style={styles.MainContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('CreateQuote')}>
           <CreateQuoteSvg />

@@ -19,25 +19,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     shadowOffset: { width: 3, height: 3 },
     marginTop: 50, // Adjust margin for better spacing
+    position: 'relative', // Position the header and footer relative to this container
   },
   headerContainer: {
-    width: '105%',
+    position: 'absolute', // Position the header absolutely within the container
+    top: 0, // Align the header to the top of the container
+    left: 0, // Align the header to the left of the container
+    width: '105.5%', // Take full width of the container
     borderWidth: 1,
     height: 43,
     backgroundColor: COLORS.graphHeaderPrimary,
     borderColor: "transparent",
     borderRadius: 8,
-    marginBottom: 428,
-    // Use a fixed margin instead of a percentage
   },
   footerContainer: {
-    width: '105%',
+    position: 'absolute', // Position the footer absolutely within the container
+    bottom: 0, // Align the footer to the bottom of the container
+    left: 0, // Align the footer to the left of the container
+    width: '105.5%', // Take full width of the container
     borderWidth: 1,
     height: 43,
     backgroundColor: COLORS.graphFooterPrimary,
     borderColor: "transparent",
     borderRadius: 5,
-    marginVertical: 109 // Use a fixed margin instead of a percentage
   },
   textstyle: {
     marginLeft: 20,
@@ -50,5 +54,4 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
-
 export default styles;

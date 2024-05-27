@@ -4,8 +4,8 @@ import { View, Text } from 'react-native';
 import styles from './QuoteStatusContainerStyles'; // Import styles specific to this component
 
 type Props = {
-  headerText: string;
-  footerText: string;
+  headerText?: string;
+  footerText?: string;
   children?: React.ReactNode;
 };
 
