@@ -1,28 +1,52 @@
-import React from 'react';
+// CommonLayout.tsx
+import React, { useState } from 'react';
 import { View, StyleSheet, ViewStyle, Text, TouchableOpacity } from 'react-native';
-import { COLORS } from '../Constraints/Generic';
+import { COLORS, windowWidth } from '../Constraints/Generic';
+import { Searchbar } from 'react-native-paper';
 import ArrowSvg from '../assets/SVG/ArrowSvg';
+import SearchSvg from '../assets/SVG/SearchSvg';
 
 interface CommonLayoutProps {
   children: React.ReactNode;
   blueSectionStyle?: ViewStyle;
   whiteSectionStyle?: ViewStyle;
   blueSectionText?: string;
-  ArrowSVG?: React.ComponentType<{ onPress?: () => void }>; 
+  ArrowSVG?: React.ComponentType<{ onPress?: () => void }>;
   goBack?: () => void;
 }
 
 const CommonLayout: React.FC<CommonLayoutProps> = ({ children, blueSectionStyle, whiteSectionStyle, blueSectionText, ArrowSVG, goBack }) => {
-  
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const onChangeSearch = (query: string) => setSearchQuery(query);
+  const blueSectionTextStyle = {
+    ...styles.blueSectionText,
+    marginTop: blueSectionText === "Manage Quote" ? 50 : 0.5,
+  };
+
   return (
     <View style={styles.container}>
       <View style={[styles.blueSection, blueSectionStyle]}>
         <View style={styles.blueSectionContent}>
-          <TouchableOpacity onPress={goBack}>
+          <TouchableOpacity onPress={goBack} style={styles.arrowIcon}>
             {ArrowSVG && <ArrowSVG onPress={goBack} />}
           </TouchableOpacity>
-          {blueSectionText && <Text style={styles.blueSectionText}>{blueSectionText}</Text>}
+          
+          {blueSectionText && <Text  style={blueSectionTextStyle}>{blueSectionText}</Text>}
         </View>
+        
+        {blueSectionText === "Manage Quote" && (
+          <View style={styles.searchContainer}>
+            <Searchbar
+              placeholder="Quote ID, Plan Name"
+              onChangeText={onChangeSearch}
+              value={searchQuery}
+              style={styles.searchbar}
+              inputStyle={styles.searchInput}
+            />
+      
+          </View>
+        )}
       </View>
       <View style={[styles.whiteSection, whiteSectionStyle]}>
         {children}
@@ -37,21 +61,47 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.onPrimary,
   },
   blueSection: {
-    flex: 0.15,
+    flex: 0.20,
     backgroundColor: COLORS.onPrimary,
     justifyContent: 'center',
-    paddingHorizontal: 16, // Add padding for better alignment
+    paddingHorizontal: 16,
+    zIndex: 1, 
   },
   blueSectionContent: {
-    flexDirection: 'row', // Align arrow and text in a row
-    alignItems: 'center', // Center vertically
-    marginTop: 30
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30,
+  },
+  arrowIcon: {
+    marginRight: 16,
   },
   blueSectionText: {
     color: COLORS.AppColor,
-    fontSize: 16,
-    marginLeft: 10, // Space between arrow and text
+    fontSize: 18,
+    flex: 1,
+    marginTop:50,
+    textAlign: 'left',
   },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height:5,
+    marginTop:50
+    
+  },
+  searchbar: {
+    flex: 1,
+    elevation: 1,
+    borderRadius:5,
+    backgroundColor: COLORS.AppColor,
+    borderWidth: 1,
+    borderColor: COLORS.onTertiary,
+    borderRightWidth: 0,
+  },
+  searchInput: {
+    fontSize: 16,
+  },
+ 
   whiteSection: {
     flex: 1,
     backgroundColor: COLORS.AppColor,

@@ -247,13 +247,13 @@ const styles = StyleSheet.create({
   ContentChildView:
   {
     backgroundColor: 'black',
-    padding: 30,
+    padding: 15,
     zIndex: 1,
     flexDirection: "row",
     justifyContent: "space-between", 
     width: "90%", 
-    borderRadius: 10, 
-    marginTop: "150%"
+    borderRadius: 7, 
+    marginTop: "160%"
   }
 
 

@@ -9,6 +9,7 @@ import ProposalFilled from './ProposalFilled';
 import ProposalsUnfilled from './ProposalsUnfilled';
 import QuoteFilled from './QuoteFilled';
 import QuoteUnfilled from './QuoteUnfilled';
+import SearchSvg from './SearchSvg';
 import SettingsFilled from './SettingsFilled';
 import SettingsUnfilled from './SettingsUnfilled';
 
@@ -26,5 +27,6 @@ export default {
   Dropdownarrow,
   ArrowSvg,
   CalenderSvg,
+  SearchSvg
 
 };

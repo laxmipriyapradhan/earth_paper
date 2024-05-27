@@ -1,6 +1,7 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 // import {AppColor} from '../Utils';
 import {tabLabels} from './config';
+import { COLORS } from '../../Constraints/Generic';
 
 interface Styles {
   tabBarStyle: ViewStyle;
@@ -12,7 +13,7 @@ const innerStyles = (props?: tabLabels) =>
   StyleSheet.create<Styles>({
     tabBarStyle: {
       height: 80,
-      backgroundColor: "blue",
+      backgroundColor: COLORS.onPrimary,
       borderRadius: 16,
       marginLeft: 5,
       marginRight: 5,
@@ -30,7 +31,7 @@ const innerStyles = (props?: tabLabels) =>
       justifyContent: 'center',
       borderRadius: 11,
       paddingHorizontal: 16,
-      backgroundColor: props?.focused ? "blue" : 'transparent',
+      backgroundColor: props?.focused ? "#2359F3" : 'transparent',
       marginTop: 8,
     },
   });
