@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import CommonLayout from '../../Common/CommonLayout';
 import ArrowSvg from '../../assets/SVG/ArrowSvg';
-import { useNavigation } from '@react-navigation/native';
-import { windowWidth } from '../../Constraints/Generic';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../Quote/config';
 import CustomDropdown from '../../Common/CustomDropdown';
 import CustomRadio from '../../Common/CustomRadio';
-import Quotestyles from './CreateQuoteStyles';
+import styles from './CreateQuoteStyles';
+import CustomTextInput from '../../Common/CustomTextInput';
+import { Text, TextInput } from 'react-native-paper';
+import CustomButton from '../../Common/CustomButton';
+import CustomText from '../../Common/CustomText';
+
+
 
 interface CreateQuoteProps { }
 
 const CreateQuote: React.FC<CreateQuoteProps> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const goBack = () => {
     navigation.goBack();
   };
+ 
 
   const [showProjectDropdown, setShowProjectDropdown] = useState(false);
   const [showSumInsuredDropdown, setShowSumInsuredDropdown] = useState(false);
   const [showNoOfAdultsDropdown, setShowNoOfAdultsDropdown] = useState(false);
   const [showNoOfChildrenDropdown, setShowNoOfChildrenDropdown] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+
+  const [date, setDate] = useState<string>('');
 
   const [dropdownValues, setDropdownValues] = useState({
     projectStatus: '',
@@ -35,6 +45,14 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
       [dropdownName]: value,
     }));
   };
+  const onCalendarIconPress = () => {
+    setShowCalendar(true);
+  };
+  const handlepress=()=>{
+    navigation.navigate('GetQuote')
+  }
+
+
 
   const Product = [
     { label: 'Select', value: '' },
@@ -65,6 +83,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
 
   return (
     <CommonLayout blueSectionText="Create Quote" ArrowSVG={ArrowSvg} goBack={goBack}>
+       <ScrollView style={styles.scrollView}>
       <View style={styles.dropdownContainer}>
         <CustomDropdown
           label="Product"
@@ -82,7 +101,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
       </View>
       {dropdownValues.projectStatus && ( // Conditionally render other fields if Product is selected
         <>
-          <View style={Quotestyles.radioContainerView}>
+          <View style={styles.radioContainerView}>
             <CustomRadio
               initialCheckedRadio="first"
               onRadioChange={(value) => console.log('Selected radio:', value)}
@@ -90,7 +109,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
               options={radioOptionsCoverType}
             />
           </View>
-          <View style={Quotestyles.radioContainerView}>
+          <View style={styles.radioContainerView}>
             <CustomRadio
               initialCheckedRadio="first"
               onRadioChange={(value) => console.log('Selected radio:', value)}
@@ -108,38 +127,57 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
               setShowDropDown={setShowSumInsuredDropdown}
             />
           </View>
-          <View style={styles.dropdownContainer}>
-            <CustomDropdown
-              label="No.of Adults"
-              value={dropdownValues.NoofAdultsStatus}
-              setValue={(value) => handleDropdownChange('NoofAdultsStatus', value)}
-              list={NoofAdults}
-              showDropDown={showNoOfAdultsDropdown}
-              setShowDropDown={setShowNoOfAdultsDropdown}
-            />
+          <Text style= {styles.textConatinermember}>Member details</Text>
+          <View style={styles.rowContainer}>
+            <View style={styles.dropdownHalf}>
+              <CustomDropdown
+                label="No.of Adults"
+                value={dropdownValues.NoofAdultsStatus}
+                setValue={(value) => handleDropdownChange('NoofAdultsStatus', value)}
+                list={NoofAdults}
+                showDropDown={showNoOfAdultsDropdown}
+                setShowDropDown={setShowNoOfAdultsDropdown}
+              />
+            </View>
+            <View style={styles.dropdownHalf}>
+              <CustomDropdown
+                label="No.of Children"
+                value={dropdownValues.NoofChildrenStatus}
+                setValue={(value) => handleDropdownChange('NoofChildrenStatus', value)}
+                list={NoofChildren}
+                showDropDown={showNoOfChildrenDropdown}
+                setShowDropDown={setShowNoOfChildrenDropdown}
+              />
+            </View>
           </View>
-          <View style={styles.dropdownContainer}>
-            <CustomDropdown
-              label="No.of Children"
-              value={dropdownValues.NoofChildrenStatus}
-              setValue={(value) => handleDropdownChange('NoofChildrenStatus', value)}
-              list={NoofChildren}
-              showDropDown={showNoOfChildrenDropdown}
-              setShowDropDown={setShowNoOfChildrenDropdown}
+          <View style= {styles.textInputView}>
+          <CustomTextInput label="Pincode" />
+          <View style= {styles.textInputCalenderView}>
+          <CustomTextInput 
+              label="Calendar" 
+              showCalendar={showCalendar} 
+              onCalendarIconPress={onCalendarIconPress} 
             />
+            </View>
+            <CustomTextInput label="Pincode" />
+          <View style= {styles.textInputCalenderView}>
+          <CustomTextInput 
+              label="Calendar" 
+              showCalendar={showCalendar} 
+              onCalendarIconPress={onCalendarIconPress} 
+            />
+            </View>
+            <TouchableOpacity onPress={handlepress}>
+            <CustomButton widthDecrement={50} text={"Get Quote"}  />
+            </TouchableOpacity>
           </View>
-        </>
+           </>
       )}
+      </ScrollView>
     </CommonLayout>
   );
 };
 
-const styles = StyleSheet.create({
-  dropdownContainer: {
-    width: windowWidth - 50,
-    marginLeft: 25,
-    marginTop: 20,
-  },
-});
+
 
 export default CreateQuote;

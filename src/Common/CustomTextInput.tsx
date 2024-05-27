@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../Constraints/Generic';
+import { COLORS, SIZES, windowWidth } from '../Constraints/Generic';
+import CalenderSvg from '../assets/SVG/CalenderSvg';
+import CalendarComponent from './CalendarComponent';
 
 interface CustomTextInputProps {
   value?: string;
@@ -13,8 +15,10 @@ interface CustomTextInputProps {
   textprefix?: string;
   linksText?: string;
   handleClick?: () => void;
-  onFocus?:(text?: number)=>void;
-  onBlur?:()=>void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  showCalendar?: boolean; 
+  onCalendarIconPress?:() => void;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -27,7 +31,18 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   textprefix,
   linksText,
   handleClick,
+  showCalendar,
+  onCalendarIconPress,
 }) => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleDateSelection = (date: Date) => {
+    setSelectedDate(date);
+    // You can perform any action with the selected date here
+    // For example, update the value of the text input with the selected date
+    onChangeText && onChangeText(date.toISOString()); // Convert date to string and pass it to the onChangeText prop
+  };
+
   return (
     <View>
       <TextInput
@@ -35,18 +50,22 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         value={value}
         placeholder={placeholder}
         onChangeText={onChangeText}
-        mode='outlined'
+        mode="outlined"
         underlineColor={COLORS.primary}
         style={styles.inp}
         cursorColor={COLORS.btnborderprimary}
         activeOutlineColor={COLORS.btnborderprimary}
-        
+        right={label === "Calendar" && !showCalendar ? (
+          <TextInput.Icon 
+            icon={() => <CalenderSvg />} // Use the `icon` prop correctly
+            onPress={onCalendarIconPress}
+          />)
+         : null}
+        onFocus={handleClick} // If showCalendar is true, allow default TextInput behavior. Otherwise, call handleClick
       />
       {textprefix && (
         <View style={styles.textPrefixContainer}>
-          <Text style={styles.textPrefix}>
-            {textprefix}
-          </Text>
+          <Text style={styles.textPrefix}>{textprefix}</Text>
         </View>
       )}
       {linksText && (
@@ -57,6 +76,11 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         </View>
       )}
       {error && <Text style={styles.errorText}>{error}</Text>}
+
+      {/* Conditional rendering of Calendar component based on the showCalendar prop */}
+      {showCalendar && label === "Calendar" && (
+        <CalendarComponent onSelectDate={handleDateSelection} />
+      )}
     </View>
   );
 };
@@ -93,7 +117,6 @@ const styles = StyleSheet.create({
     bottom: 1,
     textDecorationLine: 'underline',
   },
-
 });
 
 export default CustomTextInput;

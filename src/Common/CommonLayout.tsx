@@ -8,8 +8,8 @@ interface CommonLayoutProps {
   blueSectionStyle?: ViewStyle;
   whiteSectionStyle?: ViewStyle;
   blueSectionText?: string;
-  ArrowSVG?: React.ComponentType<{ onPress: () => void }>; 
-  goBack: () => void;
+  ArrowSVG?: React.ComponentType<{ onPress?: () => void }>; 
+  goBack?: () => void;
 }
 
 const CommonLayout: React.FC<CommonLayoutProps> = ({ children, blueSectionStyle, whiteSectionStyle, blueSectionText, ArrowSVG, goBack }) => {
