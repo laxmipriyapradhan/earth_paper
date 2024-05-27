@@ -1,5 +1,6 @@
 import AddQuote from './AddQuote';
 import ArrowSvg from './ArrowSvg';
+import CalenderSvg from './CalenderSvg';
 import CreateQuote from './CreateQuoteSvg';
 import Dropdownarrow from './Dropdownarrow';
 import HomeFilled from './HomeFilled';
@@ -23,6 +24,7 @@ export default {
   AddQuote,
   CreateQuote,
   Dropdownarrow,
-  ArrowSvg
+  ArrowSvg,
+  CalenderSvg,
 
 };

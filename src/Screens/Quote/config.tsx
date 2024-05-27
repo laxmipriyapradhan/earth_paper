@@ -35,7 +35,6 @@ export type RootStackParamList = {
   Slider: undefined;
   Login: undefined;
   Passwordvalidation: undefined;
-  Homepage: undefined;
   ForgotPassword: undefined;
   Passwordvalidationemail: undefined;
   OtpValidation: undefined;
@@ -43,7 +42,10 @@ export type RootStackParamList = {
   OtpValidationemail: undefined;
   Resetemail: undefined;
   Quotes: undefined;
-  CreateQuote: undefined;
+  GetQuote: undefined;
+  Home: undefined;
+  CreateQuote:undefined;
+  
 };
 
 

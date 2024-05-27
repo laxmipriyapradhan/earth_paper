@@ -46,7 +46,7 @@ const CustomRadio: React.FC<CustomRadioProps> = ({ initialCheckedRadio = '', onR
 
 const styles = StyleSheet.create({
   textContainer: {
-    marginRight: 280,
+    marginRight: 100,
     color: COLORS.quaternary
   },
   shareContainer: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   radioContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 100,
+    marginRight: 10,
     marginHorizontal: -20
     
   },

@@ -16,6 +16,7 @@ const CustomDropdown: React.FC<{
   list: DropdownItem[];
   showDropDown: boolean;
   setShowDropDown: (value: boolean) => void;
+  
 }> = ({ label, value, setValue, list, showDropDown, setShowDropDown }) => {
   return (
     <View style={styles.customDropdown}>

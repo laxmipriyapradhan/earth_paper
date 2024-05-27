@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, FlatList, TouchableOpacity } from 'react-native';
-import { Checkbox, Chip, RadioButton, Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+import { View, ScrollView, KeyboardAvoidingView, Platform, FlatList, TouchableOpacity } from 'react-native';
+import { Checkbox, Chip, RadioButton, Modal, Portal, Text, PaperProvider } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
-import { COLORS, FONTSTYLES, SIZES, windowWidth } from '../../Constraints/Generic';
+import { COLORS, windowWidth } from '../../Constraints/Generic';
 import CustomButton from '../../Common/CustomButton';
-import styles from './HomepageStyles'; // Import the styles
+import styles from './GetQuoteStyles';
 import ChipsSVG from '../../assets/Svg_Image/ChipsSVG';
-import CustomText from '../../Common/CustomText';
 import CustomTextInput from '../../Common/CustomTextInput';
 import Closesvg from '../../assets/Svg_Image/close';
 import CloseModal from '../../assets/Svg_Image/closeModal';
-import CommonLayout from '../../Common/CommonLayout'; // Import the common layout
+import CommonLayout from '../../Common/CommonLayout';
 import ArrowSvg from '../../assets/SVG/ArrowSvg';
-import { useNavigation } from '@react-navigation/native';
-import { NavigationProp } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../Quote/config';
 
+type GetQuoteProps = StackScreenProps<RootStackParamList, 'GetQuote'>;
 
 interface ChipData {
   label: string;
@@ -31,33 +31,32 @@ interface ContentSection {
   title?: string;
   items: ContentItem[];
 }
+
 interface CheckedStates {
   whatsapp: boolean;
   email: boolean;
   sms: boolean;
 }
-interface HomepageProps {
-  navigation: NavigationProp<Record<string, object>>;
-  goBack: () => void;
-}
 
-
-const Homepage: React.FC<HomepageProps> = ({ goBack }) => {
+const GetQuote: React.FC<GetQuoteProps> = ({ navigation }) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [innerModalVisible, setInnerModalVisible] = useState<boolean>(false);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const [checkedStates, setCheckedStates] = useState<CheckedStates>({
     whatsapp: false,
     email: false,
     sms: false,
   });
-  const [checkedRadio, setCheckedRadio] = React.useState('first');
+  const [checkedRadio, setCheckedRadio] = useState('first');
 
   const handleCheckboxPress = (name: keyof CheckedStates) => {
     setCheckedStates((prevState) => ({
       ...prevState,
       [name]: !prevState[name],
     }));
+  };
+  const goBack = () => {
+    navigation.goBack();
   };
 
   const showModal = () => setVisible(true);
@@ -278,4 +277,4 @@ const Homepage: React.FC<HomepageProps> = ({ goBack }) => {
   );
 };
 
-export default Homepage;
+export default GetQuote;

@@ -7,7 +7,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Slider from '../Slider';
 import Login from '../Login';
 import PasswordValidation from '../Passwordvalidation';
-import Homepage from '../Quotes/Homepage';
 import ForgotPassword from '../ForgotPassword';
 import Passwordvalidationemail from '../Passwordvalidationemail';
 import OtpValidation from '../OtpValidation';
@@ -18,7 +17,8 @@ import Main from './Main';
 import { lightTheme, darkTheme } from '../../Utils/Theme';
 import BottomTabs from '../Quote/BottomtabHome';
 import CreateQuote from '../Quotes/CreateQuote'; // Ensure this is imported
-import { RootStackParamList } from '../Quote/config'; // Adjust the path to where RootStackParamList is defined
+import { RootStackParamList } from '../Quote/config'; 
+import GetQuote from '../Quotes/GetQuote';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -30,7 +30,7 @@ const AppNavigation = () => {
       <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <StatusBar translucent backgroundColor="transparent" />
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Homepage">
+          <Stack.Navigator initialRouteName="Quotes">
             <Stack.Screen
               name="Slider"
               component={Slider}
@@ -77,7 +77,7 @@ const AppNavigation = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="Homepage"
+              name="Home"
               component={BottomTabs}
               options={{ headerShown: false }}
             />
@@ -89,6 +89,11 @@ const AppNavigation = () => {
             <Stack.Screen
               name="CreateQuote"
               component={CreateQuote}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="GetQuote"
+              component={GetQuote}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
