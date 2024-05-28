@@ -30,6 +30,10 @@ export const COLORS = {
   btnGroupsPrimary: '#F6F7F9',
   quotePrimary:'#D3DFFF',
   TextPrimaryValues:"#373738",
+  bottomPrimary: "#2359F3",
+  graphHeaderPrimary: "#EBF5FF",
+  graphFooterPrimary: "#F4F5F7",
+  statusPrimary: "#ED9A3A",
   /////// old  hexa code/////
   primary: '#123CB4',
   textColor1: '#303030',
@@ -71,6 +75,7 @@ export const SIZES = {
   h3: 14,
   h4: 20,
   h5: 24,
+  h6: 5
 
 };
 export const spacingVertical = 10

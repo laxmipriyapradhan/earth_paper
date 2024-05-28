@@ -1,16 +1,17 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTSTYLES, SIZES, windowHeight, windowWidth } from '../../Constraints/Generic';
+import { windowWidth } from '../../Constraints/Generic';
 
-const stylesQuotes = StyleSheet.create({
-    MainContainer:{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop:"150%",
-        marginLeft: "80%",
-        
-        
-    },
- 
-})
-export default stylesQuotes
+const styles = StyleSheet.create({
+  MainContainer: {
+    marginLeft: '75%',
+    bottom: 50,
+    zIndex: 1,
+    position: 'absolute',
+  },
+  QuotesContainer: {
+    alignItems: 'center',
+    paddingBottom: 20, // Add padding for spacing at the bottom
+  },
+});
+
+export default styles;
