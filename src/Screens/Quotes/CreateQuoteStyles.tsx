@@ -12,7 +12,10 @@ const styles = StyleSheet.create({
       },
       textConatinermember:{
         marginTop: 20,
-        marginLeft: 30
+        marginLeft: 30,
+        color: COLORS.secondary,
+        fontWeight: "bold",
+        fontSize: SIZES.h3
         
       },
       shareContainer: {
@@ -49,11 +52,12 @@ const styles = StyleSheet.create({
       },
       textInputView:{
         flex: 1,
+        
         top:10,
         borderWidth: 1,
         borderColor: "transparent",
-        backgroundColor:"#F6F6F6"
-        // marginTop: 2,
+        backgroundColor:"#F6F6F6",
+        
         
       },
       textInputCalenderView:{
@@ -76,6 +80,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: 60,
+        margin: 10
       },
       textContainer: {
         marginLeft: 8,
@@ -87,6 +92,18 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginTop: 20,
       },
+      AddonContainer:{
+        fontWeight: "bold", 
+        fontSize: 14, 
+        color: COLORS.secondary,
+        marginLeft: 25 
+
+      },
+      getQuoteContainer:{
+        bottom: 10
+
+      }
+      
 
 })
 export default styles;

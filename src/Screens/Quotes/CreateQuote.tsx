@@ -48,6 +48,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
     NoOfChildrenStatus: '',
     NoOfSumInsuredMember: '',
     NoOfDeductibles: '',
+    radioOptionsCoverType:""
   });
   const [checkedStates, setCheckedStates] = useState<CheckedStates>({
     whatsapp: false,
@@ -150,6 +151,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
     const childrenCount = parseInt(dropdownValues.NoOfChildrenStatus) || 0;
     const totalMembers = adultsCount + childrenCount;
 
+
     return Array.from({ length: totalMembers }, (_, index) => (
       <View key={index} style={styles.textInputView}>
         <Text style={styles.textConatinermember}>Member details {index + 1}</Text>
@@ -188,7 +190,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
             />
           </View>
         </View>
-        <Text style={{ fontWeight: "bold", fontSize: 14, color: COLORS.secondary, marginLeft: 25 }}>ADD ON FEATURES</Text>
+        <Text style={styles.AddonContainer}>ADD ON FEATURES</Text>
         <View style={styles.shareContainer}>
           <View style={styles.row}>
             <Checkbox
@@ -250,12 +252,12 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
             <View style={styles.rowContainer}>
               <View style={styles.dropdownHalf}>
                 <CustomDropdown
-                  label="Sum Insured"
-                  value={dropdownValues.SumInsuredStatus}
-                  setValue={(value) => handleDropdownChange('SumInsuredStatus', value)}
-                  list={SumInsured}
-                  showDropDown={showSumInsuredDropdown}
-                  setShowDropDown={setShowSumInsuredDropdown}
+                  label="No.of Children"
+                  value={dropdownValues.NoOfChildrenStatus}
+                  setValue={(value) => handleDropdownChange('NoOfChildrenStatus', value)}
+                  list={NoOfChildren}
+                  showDropDown={showNoOfChildrenDropdown}
+                  setShowDropDown={setShowNoOfChildrenDropdown}
                 />
               </View>
               <View style={styles.dropdownHalf}>
@@ -269,27 +271,18 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
                 />
               </View>
             </View>
-            <View style={styles.rowContainer}>
-              <View style={styles.dropdownHalf}>
-                <CustomDropdown
-                  label="No.of Children"
-                  value={dropdownValues.NoOfChildrenStatus}
-                  setValue={(value) => handleDropdownChange('NoOfChildrenStatus', value)}
-                  list={NoOfChildren}
-                  showDropDown={showNoOfChildrenDropdown}
-                  setShowDropDown={setShowNoOfChildrenDropdown}
-                />
-              </View>
-            </View>
-            <CustomTextInput label="Pincode" />
 
+            <CustomTextInput label="Pincode" />
             {renderMemberDetails()}
-            <TouchableOpacity onPress={handlePress}>
-              <CustomButton widthDecrement={50} text={"Get Quote"} />
-            </TouchableOpacity>
+
           </>
         )}
       </ScrollView>
+      <View style={styles.getQuoteContainer}>
+        <TouchableOpacity onPress={handlePress}>
+          <CustomButton widthDecrement={50} text={"Get Quote"} />
+        </TouchableOpacity>
+      </View>
     </CommonLayout>
   );
 };
