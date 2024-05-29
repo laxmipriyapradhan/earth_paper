@@ -34,6 +34,9 @@ export const COLORS = {
   graphHeaderPrimary: "#EBF5FF",
   graphFooterPrimary: "#F4F5F7",
   statusPrimary: "#ED9A3A",
+  statuschipPrimary:"#F8DE9C",
+  statuschipBg: "#FBEDCA",
+  underLinePrimary: "#E2E2E2",
   /////// old  hexa code/////
   primary: '#123CB4',
   textColor1: '#303030',
@@ -75,7 +78,8 @@ export const SIZES = {
   h3: 14,
   h4: 20,
   h5: 24,
-  h6: 5
+  h6: 5,
+  h7: 12
 
 };
 export const spacingVertical = 10

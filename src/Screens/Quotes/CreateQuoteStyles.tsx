@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        margin: 10
+       marginTop:10,
+        marginLeft:20
       },
       radioContainer: {
         flexDirection: 'row',
@@ -37,16 +38,22 @@ const styles = StyleSheet.create({
       rowContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 25,
+        marginHorizontal: 22,
         marginTop: 20,
       },
       dropdownHalf: {
         flex: 1,
-        marginRight: 10, // Add some space between the two dropdowns
+        justifyContent: "space-between",
+        margin:2,
+        bottom:20 
       },
       textInputView:{
         flex: 1,
-        marginTop: 15,
+        top:10,
+        borderWidth: 1,
+        borderColor: "transparent",
+        backgroundColor:"#F6F6F6"
+        // marginTop: 2,
         
       },
       textInputCalenderView:{
@@ -63,6 +70,22 @@ const styles = StyleSheet.create({
         paddingBottom: 20, // Adjust as needed
         backgroundColor: 'white', // Adjust as needed
         zIndex: 1, // Make sure it appears above other content
+      },
+   
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 60,
+      },
+      textContainer: {
+        marginLeft: 8,
+        fontSize: SIZES.h2
+      },
+      rowCheckContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginTop: 20,
       },
 
 })

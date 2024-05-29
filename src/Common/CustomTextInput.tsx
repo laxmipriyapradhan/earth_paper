@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { COLORS, SIZES, windowWidth } from '../Constraints/Generic';
 import CalenderSvg from '../assets/SVG/CalenderSvg';
-import CalendarComponent from './CalendarComponent';
+
 
 interface CustomTextInputProps {
   value?: string;
@@ -17,8 +17,8 @@ interface CustomTextInputProps {
   handleClick?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  showCalendar?: boolean; 
-  onCalendarIconPress?:() => void;
+  showCalendar?: boolean;
+  onCalendarIconPress?: () => void;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -56,11 +56,11 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         cursorColor={COLORS.btnborderprimary}
         activeOutlineColor={COLORS.btnborderprimary}
         right={label === "Calendar" && !showCalendar ? (
-          <TextInput.Icon 
+          <TextInput.Icon
             icon={() => <CalenderSvg />} // Use the `icon` prop correctly
             onPress={onCalendarIconPress}
           />)
-         : null}
+          : null}
         onFocus={handleClick} // If showCalendar is true, allow default TextInput behavior. Otherwise, call handleClick
       />
       {textprefix && (
@@ -77,10 +77,6 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
       )}
       {error && <Text style={styles.errorText}>{error}</Text>}
 
-      {/* Conditional rendering of Calendar component based on the showCalendar prop */}
-      {showCalendar && label === "Calendar" && (
-        <CalendarComponent onSelectDate={handleDateSelection} />
-      )}
     </View>
   );
 };

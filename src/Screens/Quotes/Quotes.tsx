@@ -7,6 +7,7 @@ import CommonLayout from '../../Common/CommonLayout';
 import styles from './QuotesStyles';
 import QuoteStatusContainer from '../../Common/QuoteStatusContainer'; // Import the reusable component
 import CustomChart from '../../Common/CustomChart';
+import CustomQuotation from '../../Common/CustomQuotation';
 
 type QuotesScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -21,6 +22,7 @@ type QuoteData = {
   id: string;
   headerText: string;
   footerText: string;
+  quotaionNo?: any;
 };
 
 const Quotes: React.FC<Props> = ({navigation}) => {
@@ -30,10 +32,11 @@ const Quotes: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       // Replace this with actual data fetching logic
-      const data = Array.from({length: 1}, (_, index) => ({
+      const data = Array.from({length: 3}, (_, index) => ({
         id: (index + 1).toString(),
-        headerText: 'Quotes Stats',
+        headerText: 'Samuels Raj\n9442151231.remyjan21@gmail.com',
         footerText: `Last updated: ${new Date().toLocaleTimeString()} today`,
+        quotaionNo: "124589900",
       }));
       setQuotesData(data);
     };
@@ -41,14 +44,18 @@ const Quotes: React.FC<Props> = ({navigation}) => {
   }, []);
 
   const renderItem = ({item}: {item: QuoteData}) => (
-    <QuoteStatusContainer
+    <CustomQuotation
       headerText={item.headerText}
-      footerText={item.footerText}
+      quotaionNo={item.quotaionNo}
+      
     />
   );
 
   return (
     <CommonLayout blueSectionText="Manage Quote">
+       <QuoteStatusContainer headerText= {'Quotes Stats'} footerText={ `Last updated: ${new Date().toLocaleTimeString()} today`}>
+        <CustomChart />
+      </QuoteStatusContainer>
       <FlatList
         contentContainerStyle={styles.QuotesContainer}
         data={quotesData}
@@ -60,9 +67,7 @@ const Quotes: React.FC<Props> = ({navigation}) => {
         onEndReachedThreshold={10}
         onEndReached={() => {}}
       />
-      <QuoteStatusContainer>
-        <CustomChart />
-      </QuoteStatusContainer>
+     
       <View style={styles.MainContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('CreateQuote')}>
           <CreateQuoteSvg />

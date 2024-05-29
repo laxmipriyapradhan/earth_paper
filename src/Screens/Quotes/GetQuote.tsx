@@ -107,6 +107,7 @@ const GetQuote: React.FC<GetQuoteProps> = ({ navigation }) => {
       <View style={styles.sectionChips}>
         <View style={styles.iconContainer}>
           <ChipsSVG />
+      
         </View>
         <FlatList
           data={chipsData}

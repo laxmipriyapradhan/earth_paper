@@ -11,6 +11,7 @@ import {COLORS, windowWidth} from '../Constraints/Generic';
 import {Searchbar} from 'react-native-paper';
 import ArrowSvg from '../assets/SVG/ArrowSvg';
 import SearchSvg from '../assets/SVG/SearchSvg';
+import NotificationSvg from '../assets/SVG/NotificationSvg';
 
 interface CommonLayoutProps {
   children: React.ReactNode;
@@ -36,24 +37,33 @@ const CommonLayout: React.FC<CommonLayoutProps> = ({
     ...styles.blueSectionText,
     marginTop: blueSectionText === 'Manage Quote' ? 50 : 0.5,
   };
+  const notificationStyle = blueSectionText === 'Manage Quote' ? {top: 40} : {};
 
   return (
     <View style={styles.container}>
       <View style={[styles.blueSection, blueSectionStyle]}>
         <View style={styles.blueSectionContent}>
+          
           <TouchableOpacity onPress={goBack} style={styles.arrowIcon}>
             {ArrowSVG && <ArrowSVG onPress={goBack} />}
           </TouchableOpacity>
 
           {blueSectionText && (
             <Text style={blueSectionTextStyle}>{blueSectionText}</Text>
+            
           )}
+        {blueSectionText && (
+          <View style= {[styles.notificationIcon, notificationStyle]}>
+          <NotificationSvg/>
+          </View>
+        )}
+         
         </View>
 
         {blueSectionText === 'Manage Quote' && (
           <View style={styles.searchContainer}>
             <Searchbar
-              placeholder="Quote ID, Plan Name"
+              placeholder="Quote ID, Plan Name, Customer Name, Mobile"
               onChangeText={onChangeSearch}
               value={searchQuery}
               style={styles.searchbar}
@@ -108,9 +118,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.onTertiary,
     borderRightWidth: 0,
+    
   },
   searchInput: {
-    fontSize: 16,
+    fontSize: 13,
+    
+  },
+  notificationIcon:{
+    position:"absolute",
+    marginLeft:"88%",
+   
   },
 
   whiteSection: {

@@ -18,14 +18,14 @@ const styles = StyleSheet.create({
     borderColor: COLORS.Tertiary, 
     paddingHorizontal: 10,
     shadowOffset: { width: 3, height: 3 },
-    marginTop: 50, // Adjust margin for better spacing
-    position: 'relative', // Position the header and footer relative to this container
+    marginTop: 60, 
+    position: 'relative',
   },
   headerContainer: {
-    position: 'absolute', // Position the header absolutely within the container
-    top: 0, // Align the header to the top of the container
-    left: 0, // Align the header to the left of the container
-    width: '105.5%', // Take full width of the container
+    position: 'absolute', 
+    top: 0, 
+    left: 0, 
+    width: '105.5%',
     borderWidth: 1,
     height: 43,
     backgroundColor: COLORS.graphHeaderPrimary,
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   footerContainer: {
-    position: 'absolute', // Position the footer absolutely within the container
-    bottom: 0, // Align the footer to the bottom of the container
-    left: 0, // Align the footer to the left of the container
-    width: '105.5%', // Take full width of the container
+    position: 'absolute', 
+    bottom: 0, 
+    left: 0, 
+    width: '105.5%',
     borderWidth: 1,
     height: 43,
     backgroundColor: COLORS.graphFooterPrimary,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     marginLeft: 20,
-    color: COLORS.secondary,
+    // color: COLORS.textColor,
     marginTop: 10,
     fontWeight: "bold",
   },

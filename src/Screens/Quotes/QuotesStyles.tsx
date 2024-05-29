@@ -4,7 +4,7 @@ import { windowWidth } from '../../Constraints/Generic';
 const styles = StyleSheet.create({
   MainContainer: {
     marginLeft: '75%',
-    bottom: 50,
+    bottom: 25,
     zIndex: 1,
     position: 'absolute',
   },

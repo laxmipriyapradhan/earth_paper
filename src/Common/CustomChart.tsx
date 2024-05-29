@@ -23,33 +23,16 @@ const CustomChart = () => {
         isAnimated
         // width={340}
         rotateLabel
-        spacing={25}
+        spacing={15}
         noOfSections={4}
         stackData={stackData}
         showValuesAsTopLabel
         horizontal
         stackBorderRadius={5}
         // stackData={stackData}
-        width={Dimensions.get('window').width * 0.8}
-        pointerConfig={{
-          initialPointerIndex: 0,
-          stripBehindBars: true,
-          pointerStripHeight: 210,
-          pointerLabelComponent: (items: any, index: number) => {
-            return (
-              <View
-                style={{
-                  width: 30,
-                  padding: 6,
-                  borderWidth: 1,
-                  borderRadius: 8,
-                  backgroundColor: '#eee',
-                }}>
-                <Text>{items[0].stacks[0].value}</Text>
-              </View>
-            );
-          },
-        }}
+        width={Dimensions.get('window').width * 0.7}
+        
+        
         barInnerComponent={(item: any, index) => {
           return (
             <View
