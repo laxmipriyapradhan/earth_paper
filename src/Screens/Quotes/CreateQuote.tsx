@@ -15,10 +15,8 @@ import { DateRangeProps } from './confix';
 import ButtonText from '../../Common/ButtonText';
 import { innerStyles } from '../Quotes/innerStyles';
 import moment from 'moment';
-import { COLORS } from '../../Constraints/Generic';
 
 interface CreateQuoteProps { }
-
 const CreateQuote: React.FC<CreateQuoteProps> = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -33,12 +31,12 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
   }
 
   const [showProjectDropdown, setShowProjectDropdown] = useState(false);
-  const [showSumInsuredDropdown, setShowSumInsuredDropdown] = useState(false);
+  // const [showSumInsuredDropdown, setShowSumInsuredDropdown] = useState(false);
   const [showNoOfAdultsDropdown, setShowNoOfAdultsDropdown] = useState(false);
   const [showNoOfChildrenDropdown, setShowNoOfChildrenDropdown] = useState(false);
   const [showMemberDropdown, setShowMemberDropdown] = useState(false);
   const [showDeductiblesDropdown, setShowDeductiblesDropdown] = useState(false);
-
+  const [coverTypeSelected, setCoverTypeSelected] = useState(false);
   const [dobOfEldest, setDobOfEldest] = useState<string>('');
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [dropdownValues, setDropdownValues] = useState({
@@ -48,14 +46,13 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
     NoOfChildrenStatus: '',
     NoOfSumInsuredMember: '',
     NoOfDeductibles: '',
-    radioOptionsCoverType:""
+    radioOptionsCoverType: ""
   });
   const [checkedStates, setCheckedStates] = useState<CheckedStates>({
     whatsapp: false,
     email: false,
     sms: false,
   });
-
   const handleCheckboxPress = (name: keyof CheckedStates) => {
     setCheckedStates((prevState) => ({
       ...prevState,
@@ -149,11 +146,12 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
   const renderMemberDetails = () => {
     const adultsCount = parseInt(dropdownValues.NoOfAdultsStatus) || 0;
     const childrenCount = parseInt(dropdownValues.NoOfChildrenStatus) || 0;
-    const totalMembers = adultsCount + childrenCount;
-
+    const totalMembers = dropdownValues.radioOptionsCoverType === 'Floater' ? 1 : adultsCount + childrenCount;
 
     return Array.from({ length: totalMembers }, (_, index) => (
+  
       <View key={index} style={styles.textInputView}>
+        
         <Text style={styles.textConatinermember}>Member details {index + 1}</Text>
 
         <View style={[innerStyles.container, innerStyles.counterContainer]}>
@@ -208,6 +206,7 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
           </View>
         </View>
       </View>
+      
     ));
   };
 
@@ -216,11 +215,11 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
       <ScrollView style={styles.scrollView}>
         <View style={styles.dropdownContainer}>
           <CustomDropdown
-            label="Product"
+            label="Product *"
             value={dropdownValues.projectStatus}
             setValue={(value) => {
               handleDropdownChange('projectStatus', value);
-              setShowSumInsuredDropdown(value !== '');
+             
               setShowNoOfAdultsDropdown(value !== '');
               setShowNoOfChildrenDropdown(value !== '');
               setShowMemberDropdown(value !== '');
@@ -235,46 +234,52 @@ const CreateQuote: React.FC<CreateQuoteProps> = () => {
           <>
             <View style={styles.radioContainerView}>
               <CustomRadio
-                initialCheckedRadio="first"
-                onRadioChange={(value) => console.log('Selected radio:', value)}
-                text="Cover Type"
+                initialCheckedRadio=""
+                onRadioChange={(value) => {
+                  handleDropdownChange('radioOptionsCoverType', value);
+                  setCoverTypeSelected(value !== '');
+                }}
+                text="Cover Type *"
                 options={radioOptionsCoverType}
               />
             </View>
-            <View style={styles.radioContainerView}>
-              <CustomRadio
-                initialCheckedRadio="first"
-                onRadioChange={(value) => console.log('Selected radio:', value)}
-                text="Plan Type"
-                options={radioOptionsPlanType}
-              />
-            </View>
-            <View style={styles.rowContainer}>
-              <View style={styles.dropdownHalf}>
-                <CustomDropdown
-                  label="No.of Children"
-                  value={dropdownValues.NoOfChildrenStatus}
-                  setValue={(value) => handleDropdownChange('NoOfChildrenStatus', value)}
-                  list={NoOfChildren}
-                  showDropDown={showNoOfChildrenDropdown}
-                  setShowDropDown={setShowNoOfChildrenDropdown}
-                />
-              </View>
-              <View style={styles.dropdownHalf}>
-                <CustomDropdown
-                  label="No.of Adults"
-                  value={dropdownValues.NoOfAdultsStatus}
-                  setValue={(value) => handleDropdownChange('NoOfAdultsStatus', value)}
-                  list={NoOfAdults}
-                  showDropDown={showNoOfAdultsDropdown}
-                  setShowDropDown={setShowNoOfAdultsDropdown}
-                />
-              </View>
-            </View>
+            
+              <>
+                <View style={styles.radioContainerView}>
+                  <CustomRadio
+                    initialCheckedRadio="first"
+                    onRadioChange={(value) => console.log('Selected radio:', value)}
+                    text="Plan Type *"
+                    options={radioOptionsPlanType}
+                  />
+                </View>
+                <View style={styles.rowContainer}>
+                  <View style={styles.dropdownHalf}>
+                    <CustomDropdown
+                      label="No.of Children *"
+                      value={dropdownValues.NoOfChildrenStatus}
+                      setValue={(value) => handleDropdownChange('NoOfChildrenStatus', value)}
+                      list={NoOfChildren}
+                      showDropDown={showNoOfChildrenDropdown}
+                      setShowDropDown={setShowNoOfChildrenDropdown}
+                    />
+                  </View>
+                  <View style={styles.dropdownHalf}>
+                    <CustomDropdown
+                      label="No.of Adults *"
+                      value={dropdownValues.NoOfAdultsStatus}
+                      setValue={(value) => handleDropdownChange('NoOfAdultsStatus', value)}
+                      list={NoOfAdults}
+                      showDropDown={showNoOfAdultsDropdown}
+                      setShowDropDown={setShowNoOfAdultsDropdown}
+                    />
+                  </View>
+                </View>
 
-            <CustomTextInput label="Pincode" />
-            {renderMemberDetails()}
-
+                <CustomTextInput label="Pincode *" />
+                {coverTypeSelected && renderMemberDetails()}
+              </>
+            
           </>
         )}
       </ScrollView>
